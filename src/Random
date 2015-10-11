@@ -1,0 +1,21 @@
+import java.util.Random;
+
+
+public class Dice {
+	Random rd = new Random();
+	private Board board;
+	
+	public Dice(Board board){
+		this.board=board;
+	}
+	
+	public Square roll(Player pl){
+		int a = rd.nextInt(6)+1;
+		int b = rd.nextInt(6)+1;
+		Square location = pl.getLocation();
+		int current = board.getSquareId(location);
+		int target = (current + a + b) % 20;		
+		return board.getSquareById(target);		
+	}
+	
+}
