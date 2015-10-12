@@ -21,17 +21,17 @@ public class Game {
 			
 			//Player Initializers
 			players = new Player[numOfPlayers];
+			//bütün playerları idleriyle construct et. for loop
 			currentPlayerID=0; // save load için burası modifiye edilecek
-			//GUI UPDATER
+			//GUI INIT
 			
 			
 		//Main Loop
 			//GUI nereden updatelenecek???
 			while(true){
-				if(!(currentPlayer().bankrupt)){
-					if(currentPlayer().shouldRolldice()) //Rolldice standart olarak her hamle başı true olacak bu ekzantrik  sonraki hamlede en properye git gibi şeylerde sanki dice atılmış da o sayı çıkmış sanacak bilgisayar
-						currentPlayer().rollDice();
-					currentPlayer().makeMove(); //player önce ilerleyecek sonra o yerin executorını çalıştıracak
+				if(!(currentPlayer().isBankrupt())){
+					currentPlayer().rollDice();
+					currentPlayer().move(); //player önce ilerleyecek sonra o yerin executorını çalıştıracak
 					if(currentPlayer().isFinished())
 						currentPlayerID = (currentPlayerID+1)%(players.length()-1);
 				}
@@ -53,7 +53,7 @@ public class Game {
 		players[plID].bankrupt = true;
 		//Batarsa bir oyuncu o oyuncuyu sil(array ve int), mallarını ne yap?, kartlarını ne yap? pending bağlamı?
 		//GUI bağlamında, artık o adam ekranda gözükmesin me?
-		
+		players[plID].releaseAllProperties();
 		
 	}
 	private static void finishGame() {
