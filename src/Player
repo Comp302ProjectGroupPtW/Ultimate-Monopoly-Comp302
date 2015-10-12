@@ -3,8 +3,12 @@ import java.util.ArrayList;
 /*
  *  Errors below are generated due to lack of required classes
  */
-
-
+//Dice sonucu target için square fieldı.
+//notFinished() -> booleanı false, isFinished() false
+//givePropertyTo()
+//releaseProperty()
+//releaseAllProperties()
+//move() olsun ve gidilen yerin executorunı çağırsın
 public class Player {
 	
 	private int id;
