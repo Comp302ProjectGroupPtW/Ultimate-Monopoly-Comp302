@@ -24,14 +24,17 @@ public class Game {
 			//bütün playerları idleriyle construct et. for loop
 			currentPlayerID=0; // save load için burası modifiye edilecek
 			//GUI INIT
-			
+			GUI.Init(players, board);
 			
 		//Main Loop
 			//GUI nereden updatelenecek???
 			while(true){
 				if(!(currentPlayer().isBankrupt())){
+					
 					currentPlayer().rollDice();
+					GUI.diceRolled();// Dice alacak!!!
 					currentPlayer().move(); //player önce ilerleyecek sonra o yerin executorını çalıştıracak
+					GUI
 					if(currentPlayer().isFinished())
 						currentPlayerID = (currentPlayerID+1)%(players.length()-1);
 				}
