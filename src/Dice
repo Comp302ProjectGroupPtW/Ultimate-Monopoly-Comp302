@@ -3,6 +3,7 @@ import java.util.Random;
 //GUI adaptasyon!!(iki sayı da görünecek)
 //eğer çift atılırsa playerın notFinished() fonksiyonu çağrılsın.
 //zar yüzleri için fieldlar ve getterları
+
 public class Dice {
 	Random rd = new Random();
 	private Board board;
