@@ -30,6 +30,7 @@ public class PrototypeBoard extends Board {
 		br.addSquare(new Property("North Carolina Ave", 300, 26, "Green"));	//17
 		br.addSquare(new CommonCard("Chance"));								//18
 		br.addSquare(new Property("Pennsylvania Ave", 320, 28, "Green"));	//19
+		br.addPending();  //şimdilik tek pending kartı olduğu için tek elemanlı 
 		
 	}
 		
