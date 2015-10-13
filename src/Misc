@@ -21,7 +21,7 @@ public class Misc extends Square {
 		this.name = name;
 	}
 
-	public void squareAction(Player p) {
+	public void squareAction(Player p, Player[] players) {
 		if(this.name.equals("Go")){
 			p.deposit(200);
 		} else if(this.name.equals("Roll Once")){
