@@ -8,7 +8,7 @@ public class Property extends Square {
 	private int rent;
 	private String color;
 	private Player owner;
-	
+
 	public Property() {
 		this.name=null;
 		this.basePrice=0;
@@ -96,6 +96,40 @@ public class Property extends Square {
 
 	public void setOwner(Player owner) {
 		this.owner = owner;
+	}
+
+	public void payRent(Player p){
+		p.transfer(p,this.owner,this.rent);
+	}
+
+	public void buyProperty(Player p){
+		p.withdraw(price);
+		this.setOwner(p);
+	}
+
+	public void sellProperty(Player p){
+		p.deposit(price);
+		this.setOwner(null);
+	}
+
+	@Override
+	public
+	void squareAction(Player currentPlayer) {
+		if(this.getOwner()==null){
+			boolean a = askToBuy();    //GUI ile oyuncuya almak isteyip istemediği sorulacak. Boolean döndürecek.
+			if(a){
+				buyProperty(currentPlayer);
+			}
+		} else {
+			if(this.owner!=currentPlayer){
+				payRent(currentPlayer);
+			}
+		}
+
+	}
+	
+	public boolean askToBuy(){     //GUI olarak implement edilecek
+		return true;
 	}
 
 }
