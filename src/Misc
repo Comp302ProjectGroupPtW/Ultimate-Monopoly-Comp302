@@ -1,3 +1,5 @@
+import java.util.Random;
+
 
 public class Misc extends Square {
 
@@ -11,20 +13,36 @@ public class Misc extends Square {
 		this.name=name;
 	}
 	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public void squareAction(Player p) {
 		if(this.name.equals("Go")){
 			p.deposit(200);
 		} else if(this.name.equals("Roll Once")){
-			rollOnce();
+			rollOnce(p);
 		} else if(this.name.equals("Free Parking")){
-			
+			System.out.println("Free Parking");
 		} else if(this.name.equals("Squeeze Play")){
 			squeezePlay();
 		}
 		
 	}
 	
-	public void rollOnce(){
+	public void rollOnce(Player p){
+		Random r = new Random();
+		int a = r.nextInt(5)+1;
+		showUser(a);      // GUI ile çekilen kartın sayısını oyuncuya göster
+		int b = r.nextInt(5)+1;
+		showUser(b);      // GUI ile atılan zarın sayısını oyuncuya göster
+		if(a==b){
+			p.deposit(100);
+		}
 		
 	}
 	
