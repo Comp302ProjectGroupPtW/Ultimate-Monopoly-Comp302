@@ -1,0 +1,83 @@
+
+public class CommonCards extends Square {
+
+	private String name;
+	private int chanceCardNo=0;
+	private int commCardNo=0;
+	
+	public CommonCards() {
+		super();
+	}
+
+	public CommonCards(String name) {
+		super();
+		this.name = name;
+	}
+	
+	public void pickChanceCard(Player current){
+			if(chanceCardNo==0){
+				advanceToCharles(current);
+				chanceCardNo=(chanceCardNo++)%4;
+			} else if(chanceCardNo==1){
+				advanceToSqueeze();
+				chanceCardNo=(chanceCardNo++)%4;
+			} else if(chanceCardNo==2){
+				chairperson();
+				chanceCardNo=(chanceCardNo++)%4;
+			} else if (chanceCardNo==3){
+				advanceToGo(current);
+				chanceCardNo=(chanceCardNo++)%4;
+			}
+		}
+	public void pickCommunityCard(Player current){
+		if(commCardNo==0){
+			consultancyFee();
+			commCardNo=(commCardNo++)%3;
+		} else if(commCardNo==1){
+			bargainBusiness();
+			commCardNo=(commCardNo++)%3;
+		} else if(commCardNo==2){
+			renovationSuccess();
+			commCardNo=(commCardNo++)%3;
+		}
+	}
+	
+
+	private void renovationSuccess() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void bargainBusiness() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void consultancyFee() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void advanceToGo(Player p) {
+		p.moveTo("Go");  //Oyuncu go kutusuna gidecek, bundan sonra Go'nun action u çağrılacak
+	}
+
+	private void chairperson() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void advanceToSqueeze() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void advanceToCharles(Player p) {
+		if(p.passGo(p.location, Charles)){  //passGo metodu iki square alacak, arada go yu geçip geçmediğin kontrol edip boolean döndürecek
+			p.deposit(200);
+		}
+		p.setLocation(Charles);   //Charles a gidecek ancak boardda tanımlı şeylere nasıl ulaşacak?
+		
+	}
+	
+}
