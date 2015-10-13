@@ -19,6 +19,22 @@ public class CommonCards extends Square {
 		this.action=action;
 	}
 	
+	public String getName() {
+		return name;
+	}
+
+	public String getAction() {
+		return action;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setAction(String action) {
+		this.action = action;
+	}
+
 	public void pickChanceCard(Player current, Player[] players){
 			if(chanceCardNo==0){
 				advanceToCharles(current);
