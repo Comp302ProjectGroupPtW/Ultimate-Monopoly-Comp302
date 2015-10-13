@@ -1,0 +1,36 @@
+
+public class Misc extends Square {
+
+	private String name;
+	
+	public Misc(){
+		this.name=null;
+	}
+	
+	public Misc(String name){
+		this.name=name;
+	}
+	
+	public void squareAction(Player p) {
+		if(this.name.equals("Go")){
+			p.deposit(200);
+		} else if(this.name.equals("Roll Once")){
+			rollOnce();
+		} else if(this.name.equals("Free Parking")){
+			
+		} else if(this.name.equals("Squeeze Play")){
+			squeezePlay();
+		}
+		
+	}
+	
+	public void rollOnce(){
+		
+	}
+	
+	public void squeezePlay(){
+		
+	}
+
+	
+}
