@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 
-public class Board { //inherits other boards
+public class Board { //superclass
 	private ArrayList<Square> Squares = new ArrayList<Square>(); 
 	private ArrayList<Boolean> pending = new ArrayList<Boolean>(); //pending kartlarının aktif olup olmadığını tutuyor
 
