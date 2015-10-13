@@ -114,7 +114,7 @@ public class Property extends Square {
 
 	@Override
 	public
-	void squareAction(Player currentPlayer) {
+	void squareAction(Player currentPlayer, Player[] players) {
 		if(this.getOwner()==null){
 			boolean a = askToBuy();    //GUI ile oyuncuya almak isteyip istemediği sorulacak. Boolean döndürecek.
 			if(a){
