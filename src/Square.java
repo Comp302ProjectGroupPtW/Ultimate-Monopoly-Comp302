@@ -1,7 +1,7 @@
-
-public class Square {
+public abstract class Square {
 
 	private String name;
+	
 	
 	public Square(){
 		this.name=null;
@@ -19,5 +19,6 @@ public class Square {
 		this.name = name;
 	}
 
+	public abstract void squareAction(Player p);
 	
 }
