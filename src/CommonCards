@@ -102,9 +102,10 @@ public class CommonCards extends Square {
 	}
 
 	@Override
-	public void squareAction(Player p){
+	public void squareAction(Player p, Player[] players){
+		// TODO Auto-generated method stub
 		if(this.name.equals("Chance")){
-			pickChanceCard(p);
+			pickChanceCard(p, players);
 		} else{
 			pickCommunityCard(p);
 		}
