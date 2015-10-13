@@ -1,3 +1,4 @@
+
 public abstract class Square {
 
 	private String name;
@@ -19,6 +20,6 @@ public abstract class Square {
 		this.name = name;
 	}
 
-	public abstract void squareAction(Player p);
+	public abstract void squareAction(Player p, Player[]players);
 	
 }
