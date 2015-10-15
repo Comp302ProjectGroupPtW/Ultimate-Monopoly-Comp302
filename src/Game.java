@@ -2,7 +2,7 @@
 public class Game {
 
 	public static int numOfPlayers;
-	public Board board;
+	public PrototypeBoard board;
 	public static Player[] players;
 	public static int currentPlayerID;
 	public static void main(String[] args) {
@@ -17,31 +17,46 @@ public class Game {
 		
 			//Board Initializers
 		
-			board = new Board();
+			board = new PrototypeBoard();
+			
+			//Dice initializer
+			
+			Dice dice = new Dice(board);
 			
 			//Player Initializers
 			players = new Player[numOfPlayers];
 			//bütün playerları idleriyle construct et. for loop
 			currentPlayerID=0; // save load için burası modifiye edilecek
 			//GUI INIT
-			GUI.Init(players, board);
-			
+			GuiHandler.Init(players, board);
+			GuiHandler.displayPlayer(currentPlayer()); //input olarak Player type
+		
+	}
+	private static void userRoll() {
+		// TODO Auto-generated method stub
 		//Main Loop
-			//GUI nereden updatelenecek???
-			while(true){
-				if(!(currentPlayer().isBankrupt())){
-					
-					currentPlayer().rollDice();
-					GUI.diceRolled();// Dice alacak!!!
-					currentPlayer().move(); //player önce ilerleyecek sonra o yerin executorını çalıştıracak
-					GUI
-					if(currentPlayer().isFinished())
-						currentPlayerID = (currentPlayerID+1)%(players.length()-1);
-				}
-				else
+		//GUI nereden updatelenecek???
+			if(!(currentPlayer().isBankrupt())){
+				
+				Square temp = Dice.rollDice(currentPlayer()); 
+				GuiHandler.diceRolled(dice);// Dice alacak!!! iki int
+				GuiHandler.playerMoved(temp) //int indsiverecek
+				currentPlayer().move(temp); //player önce ilerleyecek sonra o yerin executorını çalıştıracak
+				
+				if(currentPlayer().isFinished()){
 					currentPlayerID = (currentPlayerID+1)%(players.length()-1);
-
+					if(!(currentPlayer().isBankrupt()))
+					GuiHandler.displayPlayer(currentPlayer()); 
+				}
+				
+					
 			}
+			else{
+				currentPlayerID = (currentPlayerID+1)%(players.length()-1);
+				if(!(currentPlayer().isBankrupt()))
+					GuiHandler.displayPlayer(currentPlayer());
+			}
+		
 	}
 	private static Player currentPlayer() {
 		// TODO Auto-generated method stub
