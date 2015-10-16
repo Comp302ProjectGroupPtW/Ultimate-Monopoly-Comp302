@@ -6,28 +6,25 @@ import java.util.ArrayList;
 //releaseProperty()
 //releaseAllProperties()
 //move() olsun ve gidilen yerin executorunı çağırsın
+
 public class Player {
 	
 	private int id;
 	private int money;
 	private String name;
-	private Square location;
-	private ArrayList<Property> property;
-	
 	public boolean bankrupt;
+	
 	public boolean keeping;
+	private Square location;
 	
-	
+	private ArrayList<Property> propertyList = new ArrayList<Property>();
 
-	property = new ArrayList<Property>();
-	
-	
 	
 	public Player() {
 		
 	}
 	
-	public Player(int id, String name, int money, Square location, ArrayList<Property> property) {
+	public Player(int id, String name, int money, Square location, ArrayList<Property> propertyList) {
 		this.id = id;
 		this.name = name;
 		this.money = money;
@@ -36,7 +33,7 @@ public class Player {
 		keeping = false;
 		
 		this.location = location;
-		this.property = property;
+		this.propertyList = propertyList;
 		
 	}
 	
@@ -56,6 +53,14 @@ public class Player {
 		this.id = id;
 	}
 	
+	public boolean isKeeping(){
+		return keeping;
+	}
+	
+	public void setKeeping(boolean bool){
+		keeping = bool;
+	}
+	
 	public Square getLocation(){
 		return location;
 	}
@@ -68,13 +73,6 @@ public class Player {
 		return bankrupt;
 	}
 	
-	public boolean isKeeping(){
-		return keeping;
-	}
-	
-	public void setKeeping(boolean bool){
-		keeping = bool;
-	}
 
 	public int getMoney() {
 		return money;
@@ -103,31 +101,31 @@ public class Player {
 
 	
 	public ArrayList<Property> getPropertyList() {
-		return property;
+		return propertyList;
 	}
 	
-	public void addProperty(Property p) {
-		property.add(p);
+	public void addProperty(Property s) {
+		propertyList.add(s);
 	}
 
 	public Square getFirstProperty() {
-		return property.get(1);
+		return propertyList.get(1);
 	}
 	
 	public Square getSpecificProperty(int i) {
-		return property.get(i);
+		return propertyList.get(i);
 	}
 	
 	public int getPropertyNum() {
-		return property.length();
+		return propertyList.size();
 	}
 	
 	public void removeSpecificProperty(int i) {
-		return property.remove(i);
+		propertyList.remove(i);
 	}
 	
 	public boolean noProperty() {
-		return property.isEmpty();
+		return propertyList.isEmpty();
 	}
 	
 }
