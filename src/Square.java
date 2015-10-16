@@ -20,6 +20,6 @@ public abstract class Square {
 		this.name = name;
 	}
 
-	public abstract void squareAction(Player p, Player[]players);
+	public abstract void squareAction(Player p, Player[]players, Board b);
 	
 }
