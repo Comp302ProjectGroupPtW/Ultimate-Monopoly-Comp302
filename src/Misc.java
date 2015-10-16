@@ -21,7 +21,7 @@ public class Misc extends Square {
 		this.name = name;
 	}
 
-	public void squareAction(Player p, Player[] players) {
+	public void squareAction(Player p, Player[] players, Board board) {
 		if(this.name.equals("Go")){
 			p.deposit(200);
 		} else if(this.name.equals("Roll Once")){
@@ -29,7 +29,7 @@ public class Misc extends Square {
 		} else if(this.name.equals("Free Parking")){
 			System.out.println("Free Parking");
 		} else if(this.name.equals("Squeeze Play")){
-			squeezePlay();
+			squeezePlay(p, players);
 		}
 		
 	}
@@ -46,8 +46,32 @@ public class Misc extends Square {
 		
 	}
 	
-	public void squeezePlay(){
+	private void showUser(int a) {
+		// TODO Auto-generated method stub
 		
+	}
+
+	public void squeezePlay(Player p, Player[] players){
+		Random r = new Random();
+		int num = r.nextInt(11)+1;
+		showUser(num);
+		if(num>=5 && num<=9){
+			for(int i=0; i<players.length; i++){
+				p.transfer(p, players[i], 50);
+			}
+		} else if(num==3 || num==4){
+			for(int i=0; i<players.length; i++){
+				p.transfer(p, players[i], 100);
+			}
+		} else if(num==10 || num==11){
+			for(int i=0; i<players.length; i++){
+				p.transfer(p, players[i], 100);
+			}
+		} else if(num==2 || num==12){
+			for(int i=0; i<players.length; i++){
+				p.transfer(p, players[i], 200);
+			}
+		}
 	}
 
 	
