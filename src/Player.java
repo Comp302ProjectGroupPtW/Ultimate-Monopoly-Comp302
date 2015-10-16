@@ -1,8 +1,5 @@
 import java.util.ArrayList;
 
-/*
- *  Errors below are generated due to lack of required classes
- */
 //Dice sonucu target için square fieldı.
 //notFinished() -> booleanı false, isFinished() false
 //givePropertyTo()
@@ -14,22 +11,29 @@ public class Player {
 	private int id;
 	private int money;
 	private String name;
-	public boolean bankrupt;
 	private Square location;
-	private ArrayList<Square> property;
+	private ArrayList<Property> property;
+	
+	public boolean bankrupt;
+	public boolean keeping;
+	
+	
 
-	property = new ArrayList<Square>();
+	property = new ArrayList<Property>();
+	
+	
 	
 	public Player() {
 		
 	}
 	
-	public Player(int id, String name, int money, Square location, ArrayList<Square> property) {
+	public Player(int id, String name, int money, Square location, ArrayList<Property> property) {
 		this.id = id;
 		this.name = name;
 		this.money = money;
 		
 		bankrupt = false;
+		keeping = false;
 		
 		this.location = location;
 		this.property = property;
@@ -63,6 +67,14 @@ public class Player {
 	public boolean isBankrupt() {
 		return bankrupt;
 	}
+	
+	public boolean isKeeping(){
+		return keeping;
+	}
+	
+	public void setKeeping(boolean bool){
+		keeping = bool;
+	}
 
 	public int getMoney() {
 		return money;
@@ -90,12 +102,12 @@ public class Player {
 	}
 
 	
-	public ArrayList<Square> getPropertyList() {
+	public ArrayList<Property> getPropertyList() {
 		return property;
 	}
 	
-	public void addProperty(int i, Square s) {
-		property.add(i, s);
+	public void addProperty(Property p) {
+		property.add(p);
 	}
 
 	public Square getFirstProperty() {
@@ -115,7 +127,7 @@ public class Player {
 	}
 	
 	public boolean noProperty() {
-		return property.isEmty();
+		return property.isEmpty();
 	}
 	
 }
