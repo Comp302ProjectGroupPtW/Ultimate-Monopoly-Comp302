@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 
 //Dice sonucu target için square fieldı.
 //notFinished() -> booleanı false, isFinished() false
@@ -17,6 +19,8 @@ public class Player {
 	public boolean keeping;
 	private Square location;
 	
+	private HashMap<String, Integer> propertyHash = new HashMap<String, Integer>();
+	
 	private ArrayList<Property> propertyList = new ArrayList<Property>();
 
 	
@@ -24,7 +28,7 @@ public class Player {
 		
 	}
 	
-	public Player(int id, String name, int money, Square location, ArrayList<Property> propertyList) {
+	public Player(int id, String name, int money, Square location) {
 		this.id = id;
 		this.name = name;
 		this.money = money;
@@ -33,7 +37,6 @@ public class Player {
 		keeping = false;
 		
 		this.location = location;
-		this.propertyList = propertyList;
 		
 	}
 	
@@ -65,7 +68,7 @@ public class Player {
 		return location;
 	}
 	
-	public void setLocation(Square s){
+	public void moveTo(Square s){
 		this.location = s;
 	}
 	
@@ -92,36 +95,56 @@ public class Player {
 		}
 	}
 	
-	public void transfer(Player a, Player b, int amount) {
-		if (!a.isBankrupt()){
-			a.withdraw(amount);
+	public void transfer(Player b, int amount) {
+		if (!this.isBankrupt()){
+			this.withdraw(amount);
 			b.deposit(amount);
 		}
 	}
 
+	public HashMap<String, Integer> fillHash() {
+		for (int i = 0; i < getPropertyNum(); i++){
+			String color = propertyList.get(i).getColor();
+			propertyHash.put(color, 1);
+				if (propertyHash.containsKey(color)){
+					propertyHash.put(color, propertyHash.get(color) + 1);
+				}
+		}
+		return propertyHash;
+	}
+	
+	public String[] getMonopolies() {
+		ArrayList monopolies = new ArrayList();
+		propertyHash = fillHash();
+
+		Iterator colors = propertyHash.keySet().iterator();
+		
+		while(colors.hasNext()){
+			String color = (String)colors.next();
+			
+			if(3 == propertyHash.get(color)){
+				monopolies.add(color);
+			}
+		}
+		
+		return (String[])monopolies.toArray(new String[monopolies.size()]);
+	}
+	
 	
 	public ArrayList<Property> getPropertyList() {
 		return propertyList;
 	}
 	
-	public void addProperty(Property s) {
-		propertyList.add(s);
-	}
-
-	public Square getFirstProperty() {
-		return propertyList.get(1);
-	}
-	
-	public Square getSpecificProperty(int i) {
-		return propertyList.get(i);
+	public void addProperty(Property P) {
+		propertyList.add(P);
 	}
 	
 	public int getPropertyNum() {
 		return propertyList.size();
 	}
 	
-	public void removeSpecificProperty(int i) {
-		propertyList.remove(i);
+	public void removeProperty(Property P) {
+		propertyList.remove(P);
 	}
 	
 	public boolean noProperty() {
