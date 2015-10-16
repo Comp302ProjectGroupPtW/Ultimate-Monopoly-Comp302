@@ -6,51 +6,50 @@ public class CommonCards extends Square {
 	private String name;
 	private int chanceCardNo=0;
 	private int commCardNo=0;
-	private String action;
 	
 	public CommonCards() {
 		super();
-		this.action=null;
 	}
 
-	public CommonCards(String name, String action) {
+	public CommonCards(String name) {
 		super();
 		this.name = name;
-		this.action=action;
 	}
 	
 	public String getName() {
 		return name;
 	}
 
-	public String getAction() {
-		return action;
-	}
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	public void setAction(String action) {
-		this.action = action;
-	}
-
 	public void pickChanceCard(Player current, Player[] players){
 			if(chanceCardNo==0){
+				showUser("Advance to St. Charles Place");  //GUI ile user a kartın özelliğini gösterecek
 				advanceToCharles(current);
 				chanceCardNo=(chanceCardNo++)%4;
 			} else if(chanceCardNo==1){
+				showUser("Advance to Squeeze Play, if you pass “Go”, collect $200 from the bank.");
 				advanceToSqueeze(current);
 				chanceCardNo=(chanceCardNo++)%4;
 			} else if(chanceCardNo==2){
+				showUser(" You are elected as the Chairperson. Pay each player $50.");
 				chairperson(current, players);
 				chanceCardNo=(chanceCardNo++)%4;
 			} else if (chanceCardNo==3){
+				showUser(" Advance to “Go”, collect $200.");
 				advanceToGo(current);
 				chanceCardNo=(chanceCardNo++)%4;
 			}
 		}
-	public void pickCommunityCard(Player current){
+	private void showUser(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void pickCommunityCard(Player current, Board board){
 		if(commCardNo==0){
 			consultancyFee(current);
 			commCardNo=(commCardNo++)%3;
@@ -58,19 +57,18 @@ public class CommonCards extends Square {
 			bargainBusiness(current);
 			commCardNo=(commCardNo++)%3;
 		} else if(commCardNo==2){
-			renovationSuccess();
+			renovationSuccess(board);
 			commCardNo=(commCardNo++)%3;
 		}
 	}
 	
 
-	private void renovationSuccess() {
-		// TODO Auto-generated method stub
-		
+	private void renovationSuccess(Board b) {
+		b.setPending(true);
 	}
 
 	private void bargainBusiness(Player p) {
-		// TODO Auto-generated method stub
+		p.setKeeping(true);
 		
 	}
 
@@ -102,12 +100,12 @@ public class CommonCards extends Square {
 	}
 
 	@Override
-	public void squareAction(Player p, Player[] players){
+	public void squareAction(Player p, Player[] players, Board board){
 		// TODO Auto-generated method stub
 		if(this.name.equals("Chance")){
 			pickChanceCard(p, players);
 		} else{
-			pickCommunityCard(p);
+			pickCommunityCard(p, board);
 		}
 	}
 	
