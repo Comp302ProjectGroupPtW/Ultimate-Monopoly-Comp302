@@ -1,38 +1,39 @@
 import java.util.ArrayList;
 
-/*
- *  Errors below are generated due to lack of required classes
- */
 //Dice sonucu target için square fieldı.
 //notFinished() -> booleanı false, isFinished() false
 //givePropertyTo()
 //releaseProperty()
 //releaseAllProperties()
 //move() olsun ve gidilen yerin executorunı çağırsın
+
 public class Player {
 	
 	private int id;
 	private int money;
 	private String name;
 	public boolean bankrupt;
+	
+	public boolean keeping;
 	private Square location;
-	private ArrayList<Square> property;
+	
+	private ArrayList<Property> propertyList = new ArrayList<Property>();
 
-	property = new ArrayList<Square>();
 	
 	public Player() {
 		
 	}
 	
-	public Player(int id, String name, int money, Square location, ArrayList<Square> property) {
+	public Player(int id, String name, int money, Square location, ArrayList<Property> propertyList) {
 		this.id = id;
 		this.name = name;
 		this.money = money;
 		
 		bankrupt = false;
+		keeping = false;
 		
 		this.location = location;
-		this.property = property;
+		this.propertyList = propertyList;
 		
 	}
 	
@@ -52,6 +53,14 @@ public class Player {
 		this.id = id;
 	}
 	
+	public boolean isKeeping(){
+		return keeping;
+	}
+	
+	public void setKeeping(boolean bool){
+		keeping = bool;
+	}
+	
 	public Square getLocation(){
 		return location;
 	}
@@ -63,6 +72,7 @@ public class Player {
 	public boolean isBankrupt() {
 		return bankrupt;
 	}
+	
 
 	public int getMoney() {
 		return money;
@@ -90,32 +100,32 @@ public class Player {
 	}
 
 	
-	public ArrayList<Square> getPropertyList() {
-		return property;
+	public ArrayList<Property> getPropertyList() {
+		return propertyList;
 	}
 	
-	public void addProperty(int i, Square s) {
-		property.add(i, s);
+	public void addProperty(Property s) {
+		propertyList.add(s);
 	}
 
 	public Square getFirstProperty() {
-		return property.get(1);
+		return propertyList.get(1);
 	}
 	
 	public Square getSpecificProperty(int i) {
-		return property.get(i);
+		return propertyList.get(i);
 	}
 	
 	public int getPropertyNum() {
-		return property.length();
+		return propertyList.size();
 	}
 	
 	public void removeSpecificProperty(int i) {
-		return property.remove(i);
+		propertyList.remove(i);
 	}
 	
 	public boolean noProperty() {
-		return property.isEmty();
+		return propertyList.isEmpty();
 	}
 	
 }
