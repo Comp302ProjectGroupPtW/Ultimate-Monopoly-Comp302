@@ -103,29 +103,29 @@ public class Property extends Square {
 	}
 
 	public void buyProperty(Player p){
-		p.withdraw(this.price);
+		p.withdraw(price);
 		this.setOwner(p);
 	}
 
 	public void sellProperty(Player p){
-		p.deposit(this.price);
+		p.deposit(price);
 		this.setOwner(null);
 	}
-	
+
 	public void buyWithCommonCard(Player p){
-	    p.withdraw(100);
-		this.setOwner(p);
+		p.deposit(100);
+		this.setOwner(null);
 	}
 
 	@Override
-	public void squareAction(Player currentPlayer, Player[] players) {
+	public void squareAction(Player currentPlayer, Player[] players, Board board) {
 		if(this.getOwner()==null){
 			boolean a = askToBuy();    //GUI ile oyuncuya almak isteyip istemediği sorulacak. Boolean döndürecek.
 			if(a){
-				if(currentPlayer.isKeeping()){     //Arhan player a bir keeping booleanı ekle + getter setter 
+				if(currentPlayer.isKeeping()){     //Arhan player a bir keeping booleanı ekle bi de isKeeping
 					boolean b = askToUseKeeping();   //GUI ile oyuncuya kartını kullanmak isteyip istemediği sorulacak. Boolean döndürecek.
 					if(b){
-						currentPlayer.setKeeping(false);  
+						currentPlayer.setKeeping(false);  //Arhan playera bir setKeeping metodu ekle
 						this.buyWithCommonCard(currentPlayer);
 					}
 				}
@@ -136,14 +136,15 @@ public class Property extends Square {
 				this.payRent(currentPlayer);
 			}
 		}
+
 	}
-	
+
+	private boolean askToUseKeeping() {
+		return false;
+	}
+
 	public boolean askToBuy(){     //GUI olarak implement edilecek
 		return true;
-	}
-	
-	private boolean askToUseKeeping() {  //GUI olarak implement edilecek
-		return false;
 	}
 
 }
