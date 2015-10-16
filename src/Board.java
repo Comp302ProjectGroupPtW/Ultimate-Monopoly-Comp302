@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Board { //superclass
 	private ArrayList<Square> Squares = new ArrayList<Square>(); 
-	private ArrayList<Boolean> pending = new ArrayList<Boolean>(); //pending kartlarının aktif olup olmadığını tutuyor
+	private boolean pending = false; //renovation success adlı community chest için
 
 	public void addSquare(Square sq){
 		Squares.add(sq);
@@ -17,11 +17,8 @@ public class Board { //superclass
 		return Squares.indexOf(sq);
 	}
 	
-	public void addPending(){
-		pending.add(false);
+	public void switchPending(){ //tersine çeviriyor
+		pending = !pending;
 	}
-	public void setPending(int index, boolean boo){
-		pending.set(index, boo);
-	}
-
+	
 }
