@@ -91,17 +91,15 @@ public class CommonCards extends Square {
 		if(p.passGo(p.getLocation(), "Squeeze")){  //passGo metodu iki square alacak, arada go yu geçip geçmediğin kontrol edip boolean döndürecek
 			p.deposit(200);
 		}
-		p.moveTo("Squeeze");
-		
+		p.moveTo("Squeeze");	
 	}
 
 	private void advanceToCharles(Player p) {
-		p.moveTo(Charles);   //Charles a gidecek ancak boardda tanımlı şeylere nasıl ulaşacak?
+		p.moveTo("Charles"); 
 	}
 
 	@Override
 	public void squareAction(Player p, Player[] players, Board board){
-		// TODO Auto-generated method stub
 		if(this.name.equals("Chance")){
 			pickChanceCard(p, players);
 		} else{
