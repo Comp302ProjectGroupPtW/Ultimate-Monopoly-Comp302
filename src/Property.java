@@ -99,23 +99,35 @@ public class Property extends Square {
 	}
 
 	public void payRent(Player p){
-		p.transfer(p,this.owner,this.rent);
+		p.transfer(this.owner,this.rent);
 	}
 
 	public void buyProperty(Player p){
 		p.withdraw(price);
 		this.setOwner(p);
+		p.addProperty(this);
 	}
 
 	public void sellProperty(Player p){
 		p.deposit(price);
 		this.setOwner(null);
+		p.removeProperty(this);
 	}
 
 	public void buyWithCommonCard(Player p){
 		p.deposit(100);
 		this.setOwner(null);
+		p.addProperty(this);
 	}
+	
+	public int updateRent() {
+		String [] monopolies = owner.getMonopolies();
+		for(int i = 0; i<monopolies.length; i++){
+			if(monopolies[i].equals(this.color)){
+				this.rent = this.baseRent * 2; 
+				}
+			}
+		}
 
 	@Override
 	public void squareAction(Player currentPlayer, Player[] players, Board board) {
@@ -127,9 +139,11 @@ public class Property extends Square {
 					if(b){
 						currentPlayer.setKeeping(false);  //Arhan playera bir setKeeping metodu ekle
 						this.buyWithCommonCard(currentPlayer);
+						this.updateRent();
 					}
 				}
 				this.buyProperty(currentPlayer);
+				this.updateRent();
 			}
 		} else {
 			if(this.owner!=currentPlayer){
