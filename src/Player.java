@@ -10,6 +10,7 @@ public class Player {
 	
 	public boolean bankrupt;
 	public boolean keeping;
+	public boolean finished;
 	
 	private Square location;
 	
@@ -27,6 +28,7 @@ public class Player {
 		this.name = name;
 		this.money = money;
 		
+		finished = false;
 		bankrupt = false;
 		keeping = false;
 		
@@ -48,6 +50,14 @@ public class Player {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public boolean isFinished() {
+		return finished;
+	}
+	
+	public void setFinished(boolean b) {
+		finished = b;
 	}
 	
 	public boolean isKeeping(){
