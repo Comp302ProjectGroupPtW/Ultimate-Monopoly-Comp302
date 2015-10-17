@@ -22,7 +22,7 @@ public class Game {
 			//Board Initializers
 		
 			board = new PrototypeBoard();
-			
+			board.pender = null;
 			//Dice initializer
 			
 			dice = new Dice(board);
@@ -50,13 +50,31 @@ public class Game {
 		//GUI nereden updatelenecek???
 			if(!(currentPlayer().isBankrupt())){
 				
+				
+				
 				Square temp = dice.roll(currentPlayer()); 
 				gui.diceRolled(dice);// Dice alacak!!! iki int
 				gui.playerMoved(temp); 
+				
 				//çift atma kontolu
 				if(dice.isEven())
 				currentPlayer().setFinished(false);
 				//
+				
+				//pending için
+				if(board.getPending()){
+					if(currentPlayer()!=board.pender){
+						if(temp instanceof Property){
+							if(((Property) temp).getOwner()==board.pender)
+							{
+								currentPlayer().withdraw(50);
+							}
+						}
+					}
+				}
+			
+				//
+				
 				currentPlayer().moveTo(board, players, board.getSquareId(temp)); //player önce ilerleyecek sonra o yerin executorını çalıştıracak
 				
 				if(currentPlayer().isFinished()){
