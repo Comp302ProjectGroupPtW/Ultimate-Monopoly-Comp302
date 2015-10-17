@@ -1,3 +1,5 @@
+package src;
+
 
 public class Game {
 
@@ -50,12 +52,12 @@ public class Game {
 				
 				Square temp = dice.roll(currentPlayer()); 
 				gui.diceRolled(dice);// Dice alacak!!! iki int
-				gui.playerMoved(temp) 
+				gui.playerMoved(temp); 
 				//çift atma kontolu
 				if(dice.isEven())
 				currentPlayer().setFinished(false);
 				//
-				currentPlayer().moveTo(board, players, temp; //player önce ilerleyecek sonra o yerin executorını çalıştıracak
+				currentPlayer().moveTo(board, players, board.getSquareId(temp)); //player önce ilerleyecek sonra o yerin executorını çalıştıracak
 				
 				if(currentPlayer().isFinished()){
 					currentPlayerID = (currentPlayerID+1)%(players.length-1);
