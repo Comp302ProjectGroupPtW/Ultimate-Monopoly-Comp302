@@ -56,14 +56,16 @@ public class CommonCards extends Square {
 			commCardNo=(commCardNo++)%3;
 		} else if(commCardNo==2){
 			Game.show("Renovation Success: Collect $50 extra rent from the next player who lands on any of your properties.");
-			renovationSuccess(board);
+			renovationSuccess(board,current);
 			commCardNo=(commCardNo++)%3;
 		}
 	}
 	
 
-	private void renovationSuccess(Board b) {
-		b.switchPending();                 //Fatih her tur başında bunu kontrol edip doğruysa action ı gerçekleştirmen lazım
+	private void renovationSuccess(Board b, Player p) {
+		b.switchPending();
+		b.pender = p;
+		//Fatih her tur başında bunu kontrol edip doğruysa action ı gerçekleştirmen lazım
 	}
 
 	private void bargainBusiness(Player p) {
