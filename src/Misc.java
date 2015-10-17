@@ -27,7 +27,7 @@ public class Misc extends Square {
 		} else if(this.name.equals("Roll Once")){
 			rollOnce(p);
 		} else if(this.name.equals("Free Parking")){
-			showUser("Free Parking");
+			Game.show("Free Parking");
 		} else if(this.name.equals("Squeeze Play")){
 			squeezePlay(p, players);
 		}
@@ -37,24 +37,20 @@ public class Misc extends Square {
 	public void rollOnce(Player p){
 		Random r = new Random();
 		int a = r.nextInt(5)+1;
-		showUser("" + a);      // GUI ile çekilen kartın sayısını oyuncuya göster
+		Game.show("The card you picked has the number: " + a);      // GUI ile çekilen kartın sayısını oyuncuya göster
 		int b = r.nextInt(5)+1;
-		showUser("" + b);      // GUI ile atılan zarın sayısını oyuncuya göster
+		Game.show("The dice you rolled is: " + b);      // GUI ile atılan zarın sayısını oyuncuya göster
 		if(a==b){
 			p.deposit(100);
 		}
 		
 	}
 	
-	private void showUser(String a) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	public void squeezePlay(Player p, Player[] players){
 		Random r = new Random();
 		int num = r.nextInt(11)+1;
-		showUser("" + num);
+		Game.show("The dice you rolled is: " + num);
 		if(num>=5 && num<=9){
 			for(int i=0; i<players.length; i++){
 				p.transfer(players[i], 50);
