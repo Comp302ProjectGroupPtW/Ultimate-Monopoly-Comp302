@@ -21,4 +21,8 @@ public class Board { //superclass
 		pending = !pending;
 	}
 	
+	public boolean getPending(){
+		return pending;
+	}
+	
 }
