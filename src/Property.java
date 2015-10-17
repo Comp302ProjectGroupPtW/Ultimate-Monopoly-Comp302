@@ -120,7 +120,7 @@ public class Property extends Square {
 		p.addProperty(this);
 	}
 	
-	public int updateRent() {
+	public void updateRent() {
 		String [] monopolies = owner.getMonopolies();
 		for(int i = 0; i<monopolies.length; i++){
 			if(monopolies[i].equals(this.color)){
