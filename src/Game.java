@@ -49,7 +49,7 @@ public class Game {
 		//Main Loop
 		//GUI nereden updatelenecek???
 			if(!(currentPlayer().isBankrupt())){
-				
+				currentPlayer().setFinished(true);
 				
 				
 				Square temp = dice.roll(currentPlayer()); 
@@ -59,6 +59,7 @@ public class Game {
 				//çift atma kontolu
 				if(dice.isEven())
 				currentPlayer().setFinished(false);
+				dice = new Dice(board);
 				//
 				
 				//pending için
@@ -110,6 +111,12 @@ public class Game {
 	}
 	private static void finishGame() {
 		//GUI bitir ve kazananı ilan et
+		Player winnerPlayer=null;
+		for (int i = 0; i < players.length; i++) {
+			if(!players[i].isBankrupt())
+				winnerPlayer = players[i];
+		}
+		gui.finish(winnerPlayer);
 	}
 
 }
