@@ -2,21 +2,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-//Dice sonucu target için square fieldı.
-//notFinished() -> booleanı false, isFinished() false
-//givePropertyTo()
-//releaseProperty()
-//releaseAllProperties()
-//move() olsun ve gidilen yerin executorunı çağırsın
-
 public class Player {
 	
 	private int id;
 	private int money;
 	private String name;
-	public boolean bankrupt;
 	
+	public boolean bankrupt;
 	public boolean keeping;
+	
 	private Square location;
 	
 	private HashMap<String, Integer> propertyHash = new HashMap<String, Integer>();
@@ -68,7 +62,7 @@ public class Player {
 		return location;
 	}
 	
-	public void moveTo(Square s){
+	public void setLocation(Square s){
 		this.location = s;
 	}
 	
@@ -76,7 +70,6 @@ public class Player {
 		return bankrupt;
 	}
 	
-
 	public int getMoney() {
 		return money;
 	}
@@ -102,6 +95,45 @@ public class Player {
 		}
 	}
 
+	public void givePropertyTo(Player b, Property p) {
+		this.removeProperty(p);
+		b.addProperty(p);
+		p.setOwner(b);
+		this.deposit(p.getBasePrice());
+		b.deposit(p.getBasePrice());
+		//burada evler olunca onun için check edilmesi lazım
+	}
+	
+	public void releaseProperty(Property p) {
+		this.removeProperty(p);
+		this.deposit(p.getBasePrice());
+		p.setOwner(null);
+	}
+	
+	public void releaseAllProperty() {
+		int size = this.getPropertyNum();
+		for (int i = 0; i < size; i++) {
+			this.releaseProperty(this.getPropertyList().get(i));
+		}
+	}
+	
+	public boolean passGo(Board b, int i) {
+		int curr = b.getSquareId(this.location);
+		if(curr>i){
+			return true;
+		} 
+		return false;
+	}
+	
+	public void moveTo(Board b, Player[] players,int i){
+		if(this.passGo(b, b.getSquareId(this.getLocation()))){
+			this.deposit(200);
+		}
+		this.setLocation(b.getSquareById(i));
+		this.getLocation().squareAction(this, players);
+		
+	}
+	
 	public HashMap<String, Integer> fillHash() {
 		for (int i = 0; i < getPropertyNum(); i++){
 			String color = propertyList.get(i).getColor();
@@ -130,21 +162,20 @@ public class Player {
 		return (String[])monopolies.toArray(new String[monopolies.size()]);
 	}
 	
-	
 	public ArrayList<Property> getPropertyList() {
 		return propertyList;
 	}
 	
-	public void addProperty(Property P) {
-		propertyList.add(P);
+	public void addProperty(Property p) {
+		propertyList.add(p);
 	}
 	
 	public int getPropertyNum() {
 		return propertyList.size();
 	}
 	
-	public void removeProperty(Property P) {
-		propertyList.remove(P);
+	public void removeProperty(Property p) {
+		propertyList.remove(p);
 	}
 	
 	public boolean noProperty() {
