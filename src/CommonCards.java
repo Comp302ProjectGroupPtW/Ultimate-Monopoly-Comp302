@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.Random;
 
 
 public class CommonCards extends Square {
@@ -26,38 +27,35 @@ public class CommonCards extends Square {
 	}
 
 	public void pickChanceCard(Board b, Player current, Player[] players){
+		Random r = new Random();
+		chanceCardNo=r.nextInt(4);
 			if(chanceCardNo==0){
 				Game.show("Advance to St. Charles Place");  //GUI ile user a kartın özelliğini gösterecek
 				advanceToCharles(b, players, current);
-				chanceCardNo=(chanceCardNo++)%4;
 			} else if(chanceCardNo==1){
 				Game.show("Advance to Squeeze Play, if you pass “Go”, collect $200 from the bank.");
 				advanceToSqueeze(b, players, current);
-				chanceCardNo=(chanceCardNo++)%4;
 			} else if(chanceCardNo==2){
 				Game.show(" You are elected as the Chairperson. Pay each player $50.");
 				chairperson(current, players);
-				chanceCardNo=(chanceCardNo++)%4;
 			} else if (chanceCardNo==3){
 				Game.show(" Advance to “Go”, collect $200.");
 				advanceToGo(b, players, current);
-				chanceCardNo=(chanceCardNo++)%4;
 			}
 		}
 
 	public void pickCommunityCard(Player current, Board board){
+		Random r = new Random();
+		commCardNo=r.nextInt(3);
 		if(commCardNo==0){
 			Game.show("Receive Consultancy Fee: Collect $25 from the bank.");
 			consultancyFee(current);
-			commCardNo=(commCardNo++)%3;
 		} else if(commCardNo==1){
 			Game.show("Bargain Business: When you land on an unowned propert you want, buy it for only $100. Keep until needed.");
 			bargainBusiness(current);
-			commCardNo=(commCardNo++)%3;
 		} else if(commCardNo==2){
 			Game.show("Renovation Success: Collect $50 extra rent from the next player who lands on any of your properties.");
-			renovationSuccess(board,current);
-			commCardNo=(commCardNo++)%3;
+			renovationSuccess(board);
 		}
 	}
 	
