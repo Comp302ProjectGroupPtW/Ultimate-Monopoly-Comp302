@@ -120,7 +120,7 @@ public class Property extends Square {
 		p.addProperty(this);
 	}
 	
-	public int updateRent() {
+	public void updateRent() {
 		String [] monopolies = owner.getMonopolies();
 		for(int i = 0; i<monopolies.length; i++){
 			if(monopolies[i].equals(this.color)){
@@ -132,12 +132,12 @@ public class Property extends Square {
 	@Override
 	public void squareAction(Player currentPlayer, Player[] players, Board board) {
 		if(this.getOwner()==null){
-			boolean a = askToBuy();    //GUI ile oyuncuya almak isteyip istemediği sorulacak. Boolean döndürecek.
+			boolean a = Game.ask("Do you want to buy " + this.name +" for " +this.price);   
 			if(a){
-				if(currentPlayer.isKeeping()){     //Arhan player a bir keeping booleanı ekle bi de isKeeping
-					boolean b = askToUseKeeping();   //GUI ile oyuncuya kartını kullanmak isteyip istemediği sorulacak. Boolean döndürecek.
+				if(currentPlayer.isKeeping()){     
+					boolean b = Game.ask("Do you want to use your card");  
 					if(b){
-						currentPlayer.setKeeping(false);  //Arhan playera bir setKeeping metodu ekle
+						currentPlayer.setKeeping(false); 
 						this.buyWithCommonCard(currentPlayer);
 						this.updateRent();
 					}
@@ -151,14 +151,6 @@ public class Property extends Square {
 			}
 		}
 
-	}
-
-	private boolean askToUseKeeping() {
-		return false;
-	}
-
-	public boolean askToBuy(){     //GUI olarak implement edilecek
-		return true;
 	}
 
 }
