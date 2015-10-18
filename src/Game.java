@@ -40,7 +40,7 @@ public class Game {
 			//bütün playerları idleriyle construct et. for loop
 			currentPlayerID=0; // save load için burası modifiye edilecek
 			//GUI INIT
-			gui.Init(players, board);
+			gui.init(players, board);
 			gui.displayPlayer(currentPlayer()); //input olarak Player type
 		
 	}
@@ -54,7 +54,7 @@ public class Game {
 				
 				Square temp = dice.roll(currentPlayer()); 
 				gui.diceRolled(dice);// Dice alacak!!! iki int
-				gui.playerMoved(temp); 
+				gui.playerMoved(currentPlayer(),temp); 
 				
 				//çift atma kontolu
 				if(dice.isEven())
