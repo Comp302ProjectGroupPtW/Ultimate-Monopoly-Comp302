@@ -122,6 +122,7 @@ public class Player {
 		this.removeProperty(p);
 		this.deposit(p.getBasePrice());
 		p.setOwner(null);
+		p.setRent(p.getBaseRent());
 	}
 	
 	public void releaseAllProperty() {
