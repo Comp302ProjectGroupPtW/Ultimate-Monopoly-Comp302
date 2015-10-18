@@ -1,6 +1,4 @@
-
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
@@ -9,12 +7,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import net.miginfocom.swing.MigLayout;
 
 
 @SuppressWarnings("serial")
@@ -24,13 +18,13 @@ public class AppWindow extends JFrame {
 	private GamePanel gamePanel;
 	private JButton rollDice;
 
+	private GuiHandler handler;
 	
 	public void init(){
 			EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AppWindow window = new AppWindow();
-					window.frame.setVisible(true);
+					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -41,16 +35,18 @@ public class AppWindow extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AppWindow() {
+	public AppWindow(GuiHandler guiHandler, GuiSquare[] squares, GuiPlayer[] players) {
+		this.handler = guiHandler;
+		
 		frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(100, 100, 900, 600);//450,300
 		frame.setPreferredSize(new Dimension(1200, 900));
 		frame.setMinimumSize(new Dimension(450, 300));
+		frame.setResizable(false);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 
 		gamePanel = new GamePanel();
-		//setContentPane(gamePanel);
 
 		frame.getContentPane().add(gamePanel, BorderLayout.CENTER);
 
@@ -58,9 +54,7 @@ public class AppWindow extends JFrame {
 		rollDice = new JButton("Roll Dice");
 		rollDice.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				JOptionPane.showMessageDialog(frame, "Rolled!", "Dice", JOptionPane.PLAIN_MESSAGE);
-				
-				//game.userRolledDice();
+				handler.userRoll();
 			}
 		});
 
@@ -68,33 +62,14 @@ public class AppWindow extends JFrame {
 		frame.getContentPane().add(bottomPanel, BorderLayout.SOUTH);
 		bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		bottomPanel.add(rollDice);
-		frame.pack();
 
-		//gamePanel.setLayout(new CardLayout(0, 0));
-		GuiBoard b = new GuiBoard();
-		b.setMinimumSize(new Dimension(720, 720));
-		b.addSquares(new GuiSquare[]{
-				new GuiSquare("asd"),
-				new GuiSquare("name"),
-				new GuiSquare("name"),
-				new GuiProperty("p", "345", Color.GREEN).setOwner("Owner"),
-				new GuiSquare("name"),
-				new GuiSquare("name"),
-				new GuiSquare("name"),
-				new GuiSquare("name"),
-				new GuiSquare("name"),
-				new GuiSquare("name"),
-				new GuiSquare("name"),
-				new GuiSquare("name"),
-				new GuiSquare("name"),
-				new GuiSquare("name"),
-				new GuiSquare("name"),
-				new GuiSquare("name"),
-				new GuiSquare("name"),
-				new GuiSquare("name"),
-				new GuiSquare("name"),
-				new GuiSquare("name")
-		});
-		gamePanel.add(b);
+
+		gamePanel.initBoard(squares);
+				
+		frame.pack();
+	}
+	
+	public GamePanel getGamePanel(){
+		return gamePanel;
 	}
 }
