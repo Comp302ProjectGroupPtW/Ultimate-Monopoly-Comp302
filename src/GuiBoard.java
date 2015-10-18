@@ -1,43 +1,27 @@
-
-
 import javax.swing.JPanel;
 
 import java.awt.Color;
-import java.awt.GridLayout;
 
 import javax.swing.border.LineBorder;
-import javax.swing.JLabel;
-import javax.swing.BoxLayout;
 
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import com.jgoodies.forms.factories.FormFactory;
 
 import java.awt.Dimension;
-import java.util.HashMap;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.util.LinkedHashMap;
 
 public class GuiBoard extends JPanel {
-	//private int size;
-	private GuiSquare[] squares;
 
 	/**
 	 * Create the panel.
 	 */
-	public GuiBoard(/*int size*/) {
-	
-		//this.size = size;
+	public GuiBoard() {
+		
+		setMinimumSize(new Dimension(720, 720));
 		setBorder(new LineBorder(new Color(0, 0, 0), 3, true));
 		setBackground(Color.CYAN);
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		/*gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};*/
 		setLayout(gridBagLayout);
 
 	}
@@ -48,7 +32,7 @@ public class GuiBoard extends JPanel {
 	}
 
 	public void addSquares(GuiSquare[] squares){
-		this.squares = squares;
+		//this.squares = squares;
 		int size = squares.length;
 		int x = 0, y = 0, current = 0;
 		for (; x < size/4 + 1; x++) {
@@ -71,7 +55,7 @@ public class GuiBoard extends JPanel {
 		}
 	}
 	
-	public void updateAllPlayers(HashMap<GuiPlayer, GuiSquare> playerLocations){
+	public void updateAllPlayers(LinkedHashMap<GuiPlayer, GuiSquare> playerLocations){
 		
 	}
 	
