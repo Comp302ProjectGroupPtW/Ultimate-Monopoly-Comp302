@@ -70,6 +70,7 @@ public class Game {
 							if(((Property) temp).getOwner()==board.pender)
 							{
 								currentPlayer().withdraw(50);
+								board.pending=false;
 							}
 						}
 					}
@@ -108,6 +109,9 @@ public class Game {
 		//Batarsa bir oyuncu o oyuncuyu sil(array ve int), mallarÄ±nÄ± ne yap?, kartlarÄ±nÄ± ne yap? pending baÄŸlamÄ±?
 		//GUI baÄŸlamÄ±nda, artÄ±k o adam ekranda gÃ¶zÃ¼kmesin me?
 		players[plID].releaseAllProperty();
+		if(board.pender==players[plID]){
+-			board.pending=false;
+-		}
 		
 	}
 	private static void finishGame() {
