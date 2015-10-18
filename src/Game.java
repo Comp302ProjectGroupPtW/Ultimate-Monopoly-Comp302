@@ -108,6 +108,9 @@ public class Game {
 		//Batarsa bir oyuncu o oyuncuyu sil(array ve int), mallarını ne yap?, kartlarını ne yap? pending bağlamı?
 		//GUI bağlamında, artık o adam ekranda gözükmesin me?
 		players[plID].releaseAllProperty();
+		if(board.pender==players[plID]){
+			board.pending=false;
+		}
 		
 	}
 	private static void finishGame() {
