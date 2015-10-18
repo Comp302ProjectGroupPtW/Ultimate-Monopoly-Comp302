@@ -1,3 +1,4 @@
+
 import java.awt.Color;
 
 import javax.swing.JLabel;
@@ -50,7 +51,7 @@ public class GuiProperty extends GuiSquare {
 		if(this.owner != null){
 			remove(this.owner);
 		}
-		else{
+		else if(owner != null){
 			GridBagConstraints constraints = new GridBagConstraints();
 			constraints.insets = new Insets(0, 0, 0, 0);
 			constraints.fill = GridBagConstraints.BOTH;
