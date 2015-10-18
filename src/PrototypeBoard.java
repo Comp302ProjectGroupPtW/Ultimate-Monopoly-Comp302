@@ -1,6 +1,3 @@
-
-
-
 public class PrototypeBoard extends Board {
 
 
@@ -8,8 +5,8 @@ public class PrototypeBoard extends Board {
 	// CommonCard(String name)
 
 
-	public void createBoard(){
-		Board br = new Board(); 
+	public PrototypeBoard createBoard(){
+		PrototypeBoard br = new PrototypeBoard(); 
 		br.addSquare(new Misc("Go")); 										//0
 		br.addSquare(new Property("Oriental Ave", 100, 6, "Blue"));			//1 
 		br.addSquare(new CommonCards("Community Chest"));					//2
@@ -30,7 +27,7 @@ public class PrototypeBoard extends Board {
 		br.addSquare(new Property("North Carolina Ave", 300, 26, "Green"));	//17
 		br.addSquare(new CommonCards("Chance"));							//18
 		br.addSquare(new Property("Pennsylvania Ave", 320, 28, "Green"));	//19
-
+		return br;
 
 	}
 
