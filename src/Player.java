@@ -12,6 +12,7 @@ public class Player {
 	public boolean keeping;
 	public boolean finished;
 	
+	private GuiHandler theHand;
 	private Square location;
 	
 	private HashMap<String, Integer> propertyHash = new HashMap<String, Integer>();
@@ -86,12 +87,14 @@ public class Player {
 
 	public void deposit(int money) {
 		this.money = this.money + money;
+		theHand.updateBalances();
 	}
 	
 	public void withdraw(int money) {
 		if (!bankrupt){
 			if(this.money - money > 0){
 				this.money = this.money - money;
+				theHand.updateBalances();
 			}else{
 				bankrupt = true;
 			}
@@ -102,6 +105,7 @@ public class Player {
 		if (!this.isBankrupt()){
 			this.withdraw(amount);
 			b.deposit(amount);
+			theHand.updateBalances();
 		}
 	}
 
@@ -140,7 +144,7 @@ public class Player {
 			this.deposit(200);
 		}
 		this.setLocation(b.getSquareById(i));
-		this.getLocation().squareAction(this, players);
+		this.getLocation().squareAction(this, players, b);
 		
 	}
 	
