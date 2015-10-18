@@ -46,7 +46,11 @@ public class CommonCards extends Square {
 
 	public void pickCommunityCard(Player current, Board board){
 		Random r = new Random();
-		commCardNo=r.nextInt(3);
+		if(board.getPending()){
+			commCardNo=r.nextInt(2);
+		} else{
+			commCardNo=r.nextInt(3);
+		}
 		if(commCardNo==0){
 			Game.show("Receive Consultancy Fee: Collect $25 from the bank.");
 			consultancyFee(current);
@@ -58,6 +62,7 @@ public class CommonCards extends Square {
 			renovationSuccess(board);
 		}
 	}
+	
 	
 
 	private void renovationSuccess(Board b, Player p) {
