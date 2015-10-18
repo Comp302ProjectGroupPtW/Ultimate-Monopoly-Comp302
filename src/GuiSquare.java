@@ -4,7 +4,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -14,6 +13,7 @@ import javax.swing.border.LineBorder;
 public class GuiSquare extends JPanel {
 	
 	private JLabel nameLabel;
+	private JPanel playerArea;
 	private ArrayList<GuiPlayer> players;
 
 	/**
@@ -32,22 +32,32 @@ public class GuiSquare extends JPanel {
 		setLayout(gridBagLayout);
 		
 		nameLabel = new JLabel(name);
-		GridBagConstraints gbc_name = new GridBagConstraints();
-		gbc_name.insets = new Insets(0, 0, 0, 0);
-		gbc_name.gridx = 0;
-		gbc_name.gridy = 0;
-		gbc_name.weightx = 1.0;
-		add(nameLabel, gbc_name);
-
+		GridBagConstraints constraints = new GridBagConstraints();
+		constraints.insets = new Insets(0, 0, 0, 0);
+		constraints.gridx = 0;
+		constraints.gridy = 0;
+		constraints.weightx = 1.0;
+		add(nameLabel, constraints);
+		
+		playerArea = new JPanel();
+		//playerArea.setLayout(new );
+		constraints = new GridBagConstraints();
+		constraints.insets = new Insets(0, 0, 0, 0);
+		constraints.fill = GridBagConstraints.BOTH;
+		constraints.gridx = 0;
+		constraints.gridy = 10;
+		constraints.weightx = 1.0;
+		constraints.weighty = 0.5;
+		add(playerArea, constraints);
 	}
 	
 	public void addPlayer(GuiPlayer player){
 		players.add(player);
-		add(player);
+		playerArea.add(player);
 	}
 	
 	public void removePlayer(GuiPlayer player){
-		remove(player);
+		playerArea.remove(player);
 		players.remove(player);
 	}
 	
