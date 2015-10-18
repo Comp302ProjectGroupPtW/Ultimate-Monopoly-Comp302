@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Board { //superclass
 	private ArrayList<Square> Squares = new ArrayList<Square>(); 
-	private boolean pending = false; //renovation success adlı community chest için
+	public boolean pending = false; //renovation success adlı community chest için
 	public Player pender;
 
 	public void addSquare(Square sq){

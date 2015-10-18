@@ -69,6 +69,7 @@ public class Game {
 							if(((Property) temp).getOwner()==board.pender)
 							{
 								currentPlayer().withdraw(50);
+								board.pending=false;
 							}
 						}
 					}
