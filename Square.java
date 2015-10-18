@@ -1,4 +1,6 @@
 
+
+
 public abstract class Square {
 
 	private String name;
