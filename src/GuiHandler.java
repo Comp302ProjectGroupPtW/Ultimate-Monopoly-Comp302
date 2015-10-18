@@ -1,5 +1,4 @@
 import java.awt.Color;
-import java.util.Collection;
 import java.util.LinkedHashMap;
 
 import javax.swing.JOptionPane;
@@ -14,11 +13,6 @@ public class GuiHandler {
 	private LinkedHashMap<Player, GuiPlayer> playerToGuiMap;
 	private LinkedHashMap<Square, GuiSquare> squareToGuiMap;
 
-	public static void main(String[] args){
-		GuiHandler handler = new GuiHandler(null);
-		handler.init();
-	}
-
 	public GuiHandler(Game game) {
 		this.game = game;
 	}
@@ -31,24 +25,26 @@ public class GuiHandler {
 		bindToGui(players);
 
 		squareToGuiMap = new LinkedHashMap<Square, GuiSquare>();
-		bindToGui(board.getSquares());
+		bindToGui(board.getSquares().toArray(new Square[1]));
 
-		window = new AppWindow(getGuiSquaresOrdered(), getGuiPlayersOrdered());
+		window = new AppWindow(this, getGuiSquaresOrdered(), getGuiPlayersOrdered());
 		window.init();
 		initPlayers();
+		updateBalances();
 
 	}
 
-	/*public void diceRolled(Dice dice){
+	public void diceRolled(Dice dice){
 		String message = "You rolled: " + dice.getLastDie1() + ", " + dice.getLastDie2();
 		String title = "Dice";
 		JOptionPane.showMessageDialog(window, message, title, JOptionPane.PLAIN_MESSAGE);
-	}*/
+	}
 
 	public void playerMoved(Player player, Square square){
 		GuiPlayer gp = getGui(player);
-		((GuiSquare) gp.getParent()).removePlayer(gp);
+		((GuiSquare) gp.getParent().getParent()).removePlayer(gp);
 		getGui(square).addPlayer(gp);
+		window.invalidate();
 	}
 
 	public void displayPlayer(Player player){
@@ -71,8 +67,22 @@ public class GuiHandler {
 	public void updateBalances(){
 		String[] names = new String[playerToGuiMap.size()];
 		String[] balances = new String[playerToGuiMap.size()];
+		int i = 0;
+		for (Player player : playerToGuiMap.keySet()) {
+			names[i] = player.getName();
+			balances[i] = Integer.toString(player.getMoney());
+			i++;
+		}
 
 		window.getGamePanel().setBalances(names, balances);
+	}
+	
+	public void finish(Player player){
+		showMessage("Congratulations " + player.getName() + " you have won the game!", "Game Over");
+	}
+	
+	public void userRoll(){
+		game.userRoll();
 	}
 
 	private GuiPlayer[] getGuiPlayersOrdered(){//TODO Check the ordering.
@@ -95,17 +105,17 @@ public class GuiHandler {
 
 	private void initPlayers(){
 		for (Player player : playerToGuiMap.keySet()) {
-			getGui(player.getLocation).addPlayer(getGui(player));
+			getGui(player.getLocation()).addPlayer(getGui(player));
 		}
 	}
 
-	private void bindToGui(Collection<Player> players){
+	private void bindToGui(Player[] players){
 		for (Player player : players) {
 			playerToGuiMap.put(player, convertToGui(player));
 		}
 	}
 
-	private void bindToGui(Collection<Square> squares){
+	private void bindToGui(Square[] squares){
 		for (Square square : squares) {
 			squareToGuiMap.put(square, convertToGui(square));
 		}
@@ -115,15 +125,16 @@ public class GuiHandler {
 		return playerToGuiMap.get(player);
 	}
 
-	private GuiPlayer getGui(Square square){
+	private GuiSquare getGui(Square square){
 		return squareToGuiMap.get(square);
 	}
 
 	private static GuiSquare convertToGui(Square square){
-		if(square instanceof Property)
-			return new GuiProperty(square.getname(), (String) square.getPrice(), stringToColor(square.getColor()));
-		else
-			return new GuiSquare(square.getname());
+		if(square instanceof Property){
+			Property p = (Property) square;
+			return new GuiProperty(p.getName(), Integer.toString(p.getPrice()), stringToColor(p.getColor()));
+		} else
+			return new GuiSquare(square.getName());
 	}
 
 	private static GuiPlayer convertToGui(Player player){
