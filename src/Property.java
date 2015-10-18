@@ -123,7 +123,7 @@ public class Property extends Square {
 	public void updateRent() {
 		String [] monopolies = owner.getMonopolies();
 		for(int i = 0; i<monopolies.length; i++){
-			if(monopolies[i].equals(this.color)){
+			if(monopolies[i].equals(this.color) && this.basePrice!=this.price){
 				this.rent = this.baseRent * 2; 
 				}
 			}
