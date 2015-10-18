@@ -1,4 +1,4 @@
-package src;
+
 public class Game {
 
 	public static int numOfPlayers;
@@ -42,7 +42,7 @@ public class Game {
 			//GUI INIT
 			gui = new GuiHandler(self);
 			gui.init(players, board);
-			gui.displayPlayer(currentPlayer()); //input olarak Player type
+			gui.displayPlayer(players[0]); //input olarak Player type
 		
 	}
 	public void userRoll() {
@@ -96,7 +96,7 @@ public class Game {
 			}
 		
 	}
-	private static Player currentPlayer() {
+	private  Player currentPlayer() {
 		// TODO Auto-generated method stub
 		
 		return players[currentPlayerID];
@@ -111,8 +111,8 @@ public class Game {
 		//GUI baÄŸlamÄ±nda, artÄ±k o adam ekranda gÃ¶zÃ¼kmesin me?
 		players[plID].releaseAllProperty();
 		if(board.pender==players[plID]){
--			board.pending=false;
--		}
+		board.pending = false;
+		}
 		
 	}
 	private static void finishGame() {

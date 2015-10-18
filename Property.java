@@ -1,4 +1,6 @@
 
+
+
 public class Property extends Square {
 
 	private String name;
