@@ -11,7 +11,13 @@ public class BirthdayGift extends Square {
 	@Override
 	public void squareAction(Player currentPlayer, Board board) {
 		// TODO Auto-generated method stub
-		currentPlayer.deposit(200);
+		boolean get = GuiHandler.getInstance().askYesNo("Do you want to get 100$ (else you will be moved to the nearest cab station)","Buy Property");
+		if(get){
+			currentPlayer.deposit(100);
+		}
+		else {
+			Board.getInstance().moveDirect(currentPlayer, Board.getInstance().getSquareById(68));
+		}
 	}
 
 }
