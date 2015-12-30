@@ -24,7 +24,7 @@ public class StockExchange extends Square {
 			Company c = GuiHandler.getInstance().askSelection("Which company share do you want to buy?", "Buy Share", Board.getInstance().getCompanyArray());
 			currentPlayer.buyShare(c);
 		} else{
-			Company c = GuiHandler.getInstance().askSelection("Which company share do you want to buy?", "Auction Share", Board.getInstance().getCompanyArray())
+			Company c = GuiHandler.getInstance().askSelection("Which company share do you want to auction?", "Auction Share", Board.getInstance().getCompanyArray())
 			AuctionHandler.getInstance().makeAuctionShare(c);
 		}
 		
