@@ -22,7 +22,7 @@ public class StreetRepairs extends CommunityCard {
 		ArrayList<TransitStation> tstations = currentPl.getTransitStations();
 		ArrayList<CabCompany> cabs = currentPl.getCabCompanies();
 		for (int i = 0; i < estates.size() ; i++) {
-			int x = estates.get(i).getBuilding();
+			int x = estates.get(i).getBuildings();
 			if(x == 6){
 				skyscraper++;				
 			}
