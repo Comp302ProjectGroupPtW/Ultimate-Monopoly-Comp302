@@ -2,7 +2,6 @@ package domain;
 
 import java.util.ArrayList;
 
-
 public class StreetRepairs extends CommunityCard {
 
 	public StreetRepairs() {
@@ -23,7 +22,7 @@ public class StreetRepairs extends CommunityCard {
 		ArrayList<TransitStation> tstations = currentPl.getTransitStations();
 		ArrayList<CabCompany> cabs = currentPl.getCabCompanies();
 		for (int i = 0; i < estates.size() ; i++) {
-			int x = estates.get(i).getBuildings();
+			int x = estates.get(i).getBuilding();
 			if(x == 6){
 				skyscraper++;				
 			}
@@ -35,7 +34,11 @@ public class StreetRepairs extends CommunityCard {
 		others+= tstations.size();
 		for (int i = 0; i < cabs.size() ; i++) {
 			others+= cabs.get(i).getBuildings();
-		}		
+		}
+		
+		int withdrawAmount = 25*others + 40*house + 115*hotel + 100*skyscraper;
+		currentPl.withdraw(withdrawAmount);
+		
 		GuiHandler.getInstance().showMessage(getDescription(), "Card");
 	}
 
