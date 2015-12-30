@@ -23,7 +23,7 @@ public class Company {
 		}
 	}
 
-	public int getPlayerShareAmount(Player player){ //Player'ın bu companyde kaç tane share'i olduğunu döndürüyor.
+	public int getPlayerShareAmount(Player player){ //Player'Ã½n bu companyde kaÃ§ tane share'i olduÄ‘unu dÃ¶ndÃ¼rÃ¼yor.
 		int count = 0;
 		for (int i = 0; i < numOfSoldShares; i++) {
 			Player owner = shareList.get(i).getOwner();
@@ -31,7 +31,7 @@ public class Company {
 		}
 		return count;
 	}
-	public int getPlayerMoneyReceiveAmount(Player player){ //Player'ın kaç para alacağını döndürüyor. Eğer -1 dönerse işlem yapmayıp playerın bu companyde share'i yok dersin.
+	public int getPlayerMoneyReceiveAmount(Player player){ //Player'Ã½n kaÃ§ para alacaÄ‘Ã½nÃ½ dÃ¶ndÃ¼rÃ¼yor. EÄ‘er -1 dÃ¶nerse iÅ£lem yapmayÃ½p playerÃ½n bu companyde share'i yok dersin.
 		int count = getPlayerShareAmount(player);
 		if(count>0) return dividendValue[count-1];
 		return -1; 		
@@ -56,12 +56,12 @@ public class Company {
 		return false;
 	}
 	
-	public boolean sellShare(Player player){ //player will use this method in its own buy method and make transactions.
+	public boolean sellShare(Player player, Player targetPlayer){ //player will use this method in its own buy method and make transactions.
 		for (int i = 0; i < numOfSoldShares; i++) {
 			Share share = shareList.get(i);
 			Player owner = share.getOwner();
 			if(owner == player){
-				share.setOwner(null);
+				share.setOwner(targetPlayer);
 				numOfSoldShares--;
 				return true;
 			}
