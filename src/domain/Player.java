@@ -60,10 +60,6 @@ public class Player {
 		location = Board.getInstance().getSquareById(0);
 		this.balance = balance;
 	}
-
-	public HashMap<String, Integer> getEstateHash(){
-		return estateHash;
-	}
 	
 	/**
 	 * Returns the name of the player as a String.
@@ -292,7 +288,6 @@ public class Player {
 		if(amount < 0){
 			throw new IllegalArgumentException();
 		}
-
 		setBalance(getBalance() + amount);
 		GuiHandler.getInstance().updateBalances();
 	}
@@ -394,7 +389,7 @@ public class Player {
 			throw new NullPointerException();
 		}
 		if(p.getOwner().equals(null)){
-			throw new IllegalArgumentException();
+			throw new NullPointerException();
 		}
 		if(this.getBankrupt() || p.getOwner().getBankrupt()){
 			throw new IllegalArgumentException();
@@ -467,6 +462,8 @@ public class Player {
 		if(getBalance() - p.getPrice() > 0){
 			if(p instanceof Estate) {
 				estates.add((Estate) p);
+				setUniqueEstates(((Estate) p).getColor());
+
 			}
 			if(p instanceof TransitStation) {
 				transitStations.add((TransitStation) p);
@@ -479,8 +476,6 @@ public class Player {
 			}
 			p.setOwner(this);
 			withdraw(p.getPrice());
-			setMajorityEstates();
-			setMonopolyEstates();
 
 			return true;
 		}else{
@@ -531,12 +526,16 @@ public class Player {
 		}
 
 		if(p.getOwner().equals(null)){
-			throw new IllegalArgumentException();
+			throw new NullPointerException();
 		}
 
 		if(p instanceof Estate) {
 			estates.remove(p);
 			targetPlayer.getEstates().add((Estate) p);
+			setUniqueEstates(((Estate) p).getColor());
+			
+			targetPlayer.setUniqueEstates(((Estate) p).getColor());
+
 		}
 		if(p instanceof TransitStation) {
 			transitStations.remove(p);
@@ -551,13 +550,75 @@ public class Player {
 			targetPlayer.getCabCompanies().add((CabCompany)p);
 		}
 		p.setOwner(targetPlayer);
-		setMajorityEstates();
-		setMonopolyEstates();
-
-		targetPlayer.setMajorityEstates();
-		targetPlayer.setMonopolyEstates();
 	}
 
+	
+	public void buyShare(Company co){
+		if(getBalance() - co.getPriceOfShare() > 0){
+			if(co.buyShare(this)){
+				withdraw(co.getPriceOfShare());
+			}
+		}else{
+			setBankrupt(true);
+		}
+	}
+	
+	public void buyShareWithBid(Company co, int highestBid){
+		if(getBalance() - highestBid > 0){
+			if(co.buyShare(this)){
+				withdraw(highestBid);
+			}
+		}else{
+			setBankrupt(true);
+		}
+	}
+	
+	public void transferShare(Company co, Player targetPlayer){
+		co.sellShare(this);
+		co.buyShare(targetPlayer);
+	}
+	
+	public void mortgagedShare(Company co){
+		if(co.mortgageShare(this)){
+			deposit(co.getLoanValue());
+		}
+	}
+	
+	public boolean buyPropertyWithBid(Property p, int highestBid){
+		if(getBankrupt()){
+			throw new IllegalArgumentException();
+		}
+
+		if(this.equals(null)){
+			throw new NullPointerException();
+		}
+		if(this.getBankrupt()){
+			throw new IllegalArgumentException();
+		}
+		
+		if(getBalance() - highestBid > 0){
+			if(p instanceof Estate) {
+				estates.add((Estate) p);
+				setUniqueEstates(((Estate) p).getColor());
+			}
+			if(p instanceof TransitStation) {
+				transitStations.add((TransitStation) p);
+			}
+			if(p instanceof Utility) {
+				utilities.add((Utility) p);
+			}
+			if(p instanceof CabCompany) {
+				cabCompanies.add((CabCompany) p);
+			}
+			p.setOwner(this);
+			withdraw(highestBid);
+
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
 	private void releaseEstate(Estate p) {
 		getEstates().remove(p);
 		deposit(p.getPrice());
@@ -678,37 +739,23 @@ public class Player {
 		return majorEstates;
 	}
 
-	private HashMap<String, Integer> fillEstateHash() {
-		for (int i = 0; i < estates.size(); i++){
-			String color = estates.get(i).getColor();
-			
+	private void fillEstateHash(String color) {
 			if (estateHash.containsKey(color)){
 				estateHash.put(color, estateHash.get(color) + 1);
 			}else{
 				estateHash.put(color, 1);
 			}
-		}
-		return estateHash;
 	}
 	
-	private void setMonopolyEstates() {
+	private void setUniqueEstates(String colour) {
 
-		estateHash = fillEstateHash();
+		fillEstateHash(colour);
 		Board gameBoard = Board.getInstance();
 		
 		for(String color : estateHash.keySet()){
 			if(gameBoard.getColorAmount(color) == estateHash.get(color)){
 				getMonopolyEstates().add(color);
 			}
-		}
-	}
-
-	private void setMajorityEstates() {
-
-		estateHash = fillEstateHash();
-		Board gameBoard = Board.getInstance();
-		
-		for(String color : estateHash.keySet()){
 			if(gameBoard.getColorAmount(color) == 3){
 				if(estateHash.get(color) == 2){
 					getMajorEstates().add(color);
