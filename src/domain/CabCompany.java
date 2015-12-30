@@ -20,16 +20,7 @@ public class CabCompany extends Property implements Buildable {
 		this.setRent(25);
 		this.pb= new DoNothingPassBehavior();
 	}
-
-	@Override
-	public void demolishAll() {
-		while(this.cabStands>=1){
-			this.cabStands--;
-			this.updateRent();
-		}
-		GuiHandler.getInstance().updateBuilding(this);
-	}
-
+	
 	public CabCompany(Player owner, int rent, int price, int mortgageValue,
 			boolean isMortgaged) {
 		super(owner, rent, price, mortgageValue, isMortgaged);
@@ -44,9 +35,11 @@ public class CabCompany extends Property implements Buildable {
 			if(buy){
 				currentPlayer.buyProperty(this);
 				this.updateRent();
-			} 
+			} else{
+				AuctionHandler.getInstance().makeAuction(this);
+			}
 		}
-
+		
 		else {
 			currentPlayer.payRent(this);
 		}
@@ -67,7 +60,7 @@ public class CabCompany extends Property implements Buildable {
 			port[6]=board.getSquareById(83);
 			port[7]=board.getSquareById(95);
 			port[8]=board.getSquareById(110);
-			Square s = GuiHandler.getInstance().askSelection("Where do you want to travel?","",port);   // Ata metoda bak
+			Square s = GuiHandler.getInstance().askSelection("Where do you want to travel?","",port);   
 			board.moveDirect(currentPlayer, s);
 		}
 	}
@@ -85,10 +78,10 @@ public class CabCompany extends Property implements Buildable {
 	public void sellBack(Player currentPlayer) {
 		// TODO Auto-generated method stub
 		if(this.cabStands>=1){
-			currentPlayer.deposit(75);
-			this.cabStands--;
-			this.updateRent();
-			GuiHandler.getInstance().updateBuilding(this);
+		currentPlayer.deposit(75);
+		this.cabStands--;
+		this.updateRent();
+		GuiHandler.getInstance().updateBuilding(this);
 		}
 	}
 
@@ -125,6 +118,16 @@ public class CabCompany extends Property implements Buildable {
 	public int getBuildings() {
 		// TODO Auto-generated method stub
 		return this.cabStands;
+	}
+
+	@Override
+	public void demolishAll() {
+		// TODO Auto-generated method stub
+		while(this.cabStands>=1){
+			this.cabStands--;
+			this.updateRent();
+		}
+		GuiHandler.getInstance().updateBuilding(this);
 	}
 
 }
