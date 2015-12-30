@@ -15,22 +15,15 @@ public class TransitStation extends Property implements Buildable {
 	}
 
 	@Override
-	public void demolishAll() {
-		while(this.trainDepot>=1){
-			this.trainDepot--;
-			this.updateRent();
-		}
-		GuiHandler.getInstance().updateBuilding(this);
-	}
-
-	@Override
 	public void squareAction(Player currentPlayer, Board board) {
 		// TODO Auto-generated method stub
 		if(this.getOwner()==null){
 			boolean buy = GuiHandler.getInstance().askYesNo("Do you want to buy " + this.getName() +" for $" +this.getPrice(), "Transit Station");
 			if(buy){
 				currentPlayer.buyProperty(this);
-			} 
+			} else{
+				AuctionHandler.getInstance().makeAuction(this);
+			}
 		}
 		else {
 			currentPlayer.payRent(this);
@@ -50,10 +43,10 @@ public class TransitStation extends Property implements Buildable {
 	public void sellBack(Player currentPlayer) {
 		// TODO Auto-generated method stub
 		if(this.trainDepot>=1){
-			currentPlayer.deposit(150);
-			this.trainDepot--;
-			this.updateRent();
-			GuiHandler.getInstance().updateBuilding(this);
+		currentPlayer.deposit(150);
+		this.trainDepot--;
+		this.updateRent();
+		GuiHandler.getInstance().updateBuilding(this);
 		}
 	}
 
@@ -64,7 +57,7 @@ public class TransitStation extends Property implements Buildable {
 			this.trainDepot--;
 			this.updateRent();
 			GuiHandler.getInstance().updateBuilding(this);
-		}
+			}
 	}
 
 	@Override
@@ -81,6 +74,16 @@ public class TransitStation extends Property implements Buildable {
 	@Override
 	public int getBuildings() {
 		return this.trainDepot;
+	}
+
+	@Override
+	public void demolishAll() {
+		// TODO Auto-generated method stub
+		while(this.trainDepot>=1){
+			this.trainDepot--;
+			this.updateRent();
+			}
+		GuiHandler.getInstance().updateBuilding(this);
 	}
 
 }
