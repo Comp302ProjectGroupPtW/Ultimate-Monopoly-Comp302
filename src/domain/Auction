@@ -1,0 +1,55 @@
++package domain;
+
++
+
++public class Auction extends Square {
+
++
+
++	public Auction(int id){
+
++		this.setId(id);
+
++		this.pb= new DoNothingPassBehavior();
+
++		setName("Auction");
+
++	}
+
++	
+
++	@Override
+
++	public void squareAction(Player currentPlayer, Board board) {
+
++		Property p = chooseUnownedProperty();
+
++		if(p==null){
+
++			//move to the highest rented square according to transit station rules?
+
++		} else {
+
++		AuctionHandler.getInstance().makeAuction(p);
+
++		}
+
++	}
+
++
+
++	private Property chooseUnownedProperty() {
+
++		// TODO Auto-generated method stub
+
++		Property[] unowned = Board.getInstance().findUnownedProperty();
+
++		Property select = GuiHandler.getInstance().askSelection("Which property do you want to put up for auction?", "Auction", unowned);
+
++		return select;
+
++	}
+
++
+
++}
