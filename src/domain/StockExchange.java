@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.ArrayList;
 
 
 public class StockExchange extends Square {
@@ -21,10 +22,19 @@ public class StockExchange extends Square {
 		}
 		boolean buy = GuiHandler.getInstance().askYesNo("Do you want to buy a share?", "Buy Share");
 		if(buy){
-			Company c = GuiHandler.getInstance().askSelection("Which company share do you want to buy?", "Buy Share", Board.getInstance().getCompanyArray());
+			ArrayList<Company> available=new ArrayList<Company>();
+			int i=0;
+			for(Company c: Board.getInstance().getCompanyArray()){
+				if(c.hasBuyableShare()){
+					available.add(c);
+					i++;
+				}
+			}
+			Company[] fin = available.toArray(fin);
+			Company c = GuiHandler.getInstance().askSelection("Which company share do you want to buy?", "Buy Share", fin);
 			currentPlayer.buyShare(c);
 		} else{
-			Company c = GuiHandler.getInstance().askSelection("Which company share do you want to auction?", "Auction Share", Board.getInstance().getCompanyArray())
+			Company c = GuiHandler.getInstance().askSelection("Which company share do you want to auction?", "Auction Share", fin);
 			AuctionHandler.getInstance().makeAuctionShare(c);
 		}
 		
