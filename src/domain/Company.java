@@ -22,6 +22,9 @@ public class Company {
 			shareList.add(new Share(this));	
 		}
 	}
+		public String getName(){
+		return name;
+	}
 
 	public int getPlayerShareAmount(Player player){ //Player'ýn bu companyde kaç tane share'i olduđunu döndürüyor.
 		int count = 0;
