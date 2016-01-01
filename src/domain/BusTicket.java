@@ -5,7 +5,8 @@ import java.util.ArrayList;
 public class BusTicket extends ChanceCard implements Keepable{
 
 	BusTicket() {
-		super("name", "description");
+		super("Bus Ticket", "The player moves to any square on his side of the board. \n"
+				+ "Using this card expires all the other chance cards the player has.");
 		// TODO Auto-generated constructor stub
 	}
 
@@ -37,4 +38,6 @@ public class BusTicket extends ChanceCard implements Keepable{
 		
 		GuiHandler.getInstance().showMessage(getDescription(), "Card");
 	}
+
+
 }
