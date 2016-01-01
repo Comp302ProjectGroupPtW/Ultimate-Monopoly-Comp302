@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -76,7 +77,93 @@ public class Board {
 		return sq;
 	}
 	
-		public ArrayList<Square> getUnownedProperties(){
+	public ArrayList<Square> getSideOfSquare(int layer, int position){
+		ArrayList<Square> sqs = new ArrayList<Square>();
+		if(layer == 0){
+			if(position<=6){
+				for (int i = 0; i <= 6 ; i++) {
+					sqs.add(squares[layer][i]);
+				}
+				return sqs;
+			}
+			if(position<=12){
+				for (int i = 6; i <= 12 ; i++) {
+					sqs.add(squares[layer][i]);
+				}
+				return sqs;
+			}
+			if(position<=18){
+				for (int i = 12; i <= 18 ; i++) {
+					sqs.add(squares[layer][i]);
+				}
+				return sqs;
+			}
+			else{				
+				sqs.add(squares[0][0]);
+				for (int i = 18; i <= 23 ; i++) {
+					sqs.add(squares[layer][i]);
+				}
+				return sqs;
+			}
+		}
+		if(layer == 1){
+			if(position<=10){
+				for (int i = 0; i <= 10 ; i++) {
+					sqs.add(squares[layer][i]);
+				}
+				return sqs;
+			}
+			if(position<=20){
+				for (int i = 10; i <= 20 ; i++) {
+					sqs.add(squares[layer][i]);
+				}
+				return sqs;
+			}
+			if(position<=30){
+				for (int i = 20; i <= 30 ; i++) {
+					sqs.add(squares[layer][i]);
+				}
+				return sqs;
+			}
+			else{
+				sqs.add(squares[1][0]);
+				for (int i = 30; i <= 39 ; i++) {
+					sqs.add(squares[layer][i]);
+				}
+				return sqs;
+			}
+		}
+		if(layer == 2){
+			if(position<=14){
+				for (int i = 0; i <= 14 ; i++) {
+					sqs.add(squares[layer][i]);
+				}
+				return sqs;
+			}
+			if(position<=28){
+				for (int i = 14; i <= 28 ; i++) {
+					sqs.add(squares[layer][i]);
+				}
+				return sqs;
+			}
+			if(position<=42){
+				for (int i = 28; i <= 42 ; i++) {
+					sqs.add(squares[layer][i]);
+				}
+				return sqs;
+			}
+			else{
+				sqs.add(squares[2][0]);
+				for (int i = 42; i <= 55 ; i++) {
+					sqs.add(squares[layer][i]);
+				}
+				return sqs;
+			}
+		}
+		return sqs;
+	}
+	
+	public ArrayList<Square> getUnownedProperties(){
 		ArrayList<Square> unownedProperties = new ArrayList<Square>();
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < squares[i].length; j++) {
