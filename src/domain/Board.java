@@ -11,13 +11,23 @@ import java.util.LinkedList;
  * This class is responsible from the movement of the {@link Player} objects on the Board.
  *
  */
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.NONE)
+@XmlType(factoryMethod="getInstance")
 public class Board {
 	private static Board instance = new Board();
+	@XmlElement
 	private int pool;
 	private Square[][] squares;
+	@XmlElementWrapper(name = "communityCards")
+	@XmlElement(name = "communityCard", type = CommunityCard.class)
 	private LinkedList<CommunityCard> communityCards;
+	@XmlElementWrapper(name = "chanceCards")
+	@XmlElement(name = "chanceCard", type = ChanceCard.class)
 	private LinkedList<ChanceCard> chanceCards;
 	private HashMap<String, Integer> map;
+	@XmlElementWrapper(name = "companies")
+	@XmlElement(name = "company", type = Company.class)
 	private Company[] companyArray;
 
 	/**
