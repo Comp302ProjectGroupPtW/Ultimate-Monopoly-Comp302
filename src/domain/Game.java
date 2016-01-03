@@ -230,92 +230,108 @@ public class Game {
 		gui.displayPlayer(currentPlayer);
 		return;
 	}
+//	public void debug(){
+//
+//		for (int i = 0; i < players.size(); i++) {
+//
+//			Player pl = getPlayers()[i];
+//
+//			boolean desired = gui.askYesNo("Do you want to modify Player"+i,"Selection of Player");
+//
+//			if(desired){
+//
+//				boolean propertyAddCheck = gui.askYesNo("Do you want to add Property","Add Property");
+//
+//				if(propertyAddCheck){
+//					ArrayList<Square> sqs = new ArrayList<Square>();
+//					sqs.addAll(Arrays.asList(Board.getInstance().getSquares()[0]));
+//					sqs.addAll(Arrays.asList(Board.getInstance().getSquares()[1]));
+//					sqs.addAll(Arrays.asList(Board.getInstance().getSquares()[2]));
+//					Property pr = (Property) gui.askSelection("Select the property which you want to add.","Add Property", sqs.toArray(new Square[1]));
+//
+//					pl.deposit(pr.getPrice());
+//
+//					pl.buyProperty(pr);
+//
+//				}
+//
+//				boolean moneyModifyCheck = gui.askYesNo("Do you want to change money","Change Money");
+//
+//				if(moneyModifyCheck){
+//
+//					int money=Integer.parseInt(gui.askForInput("Enter the number of the players","Number of Players"));
+//
+//					pl.setBalance(money);
+//
+//				}
+//
+//				boolean propertyBuildingAddCheck = gui.askYesNo("Do you want to build an upgrade to your Properties","Build Upgrade");
+//
+//				if(propertyBuildingAddCheck){
+//					ArrayList<Square> cumulation = new ArrayList<Square>();
+//					cumulation.addAll(currentPlayer.getEstates());
+//					cumulation.addAll(currentPlayer.getTransitStations());
+//					cumulation.addAll(currentPlayer.getCabCompanies());
+//					cumulation.addAll(currentPlayer.getUtilities());
+//					Property p =gui.askSelection("Select the property which you want to upgrade:","Upgrade Property",cumulation.toArray(new Property[1]));
+//
+//
+//					((Buildable)p).build(pl);
+//
+//				}
+//
+//				boolean propertyDowngradeCheck = gui.askYesNo("Do you want to build an upgrade (downgrade?) to your Properties","Build Upgrade");
+//
+//				if(propertyDowngradeCheck){
+//					ArrayList<Square> cumulation = new ArrayList<Square>();
+//					cumulation.addAll(currentPlayer.getEstates());
+//					cumulation.addAll(currentPlayer.getTransitStations());
+//					cumulation.addAll(currentPlayer.getCabCompanies());
+//					cumulation.addAll(currentPlayer.getUtilities());
+//					Property p =gui.askSelection("Select the property which you want to upgrade:","Upgrade Property",cumulation.toArray(new Property[1]));
+//
+//
+//					((Buildable) p).sellBack(pl);
+//
+//				}
+//
+//				boolean positionModCheck = gui.askYesNo("Do you want to change position of the player","Position Change");
+//
+//				if(positionModCheck){
+//					ArrayList<Square> sqs = new ArrayList<Square>();
+//					sqs.addAll(Arrays.asList(Board.getInstance().getSquares()[0]));
+//					sqs.addAll(Arrays.asList(Board.getInstance().getSquares()[1]));
+//					sqs.addAll(Arrays.asList(Board.getInstance().getSquares()[2]));
+//					Square sq = (Square) gui.askSelection("Select the square to move on.","Change Location",sqs.toArray(new Square[1]));
+//
+//					board.moveDirect(pl,sq);
+//
+//				}
+//
+//			}
+//
+//		}
+//
+//		boolean diceModCheck = gui.askYesNo("Do you want to change values of Dice","Dice Modification");
+//
+//		if(diceModCheck){
+//
+//			dice.getInstance().debug=true;
+//
+//			dice.getInstance().debug1=Integer.parseInt(gui.askForInput("Enter the value for the 1st dice","1st Dice Value"));
+//
+//			dice.getInstance().debug2=Integer.parseInt(gui.askForInput("Enter the value for the 2nd Dice","2nd Dice Value"));
+//
+//			dice.getInstance().debug3=Integer.parseInt(gui.askForInput("Enter the value for the 3rd Dice","3rd Dice Value"));
+//
+//		}
+//
+//	}
+//
+
 	public void debug(){
 
-		for (int i = 0; i < players.size(); i++) {
-
-			Player pl = getPlayers()[i];
-
-			boolean desired = gui.askYesNo("Do you want to modify Player"+i,"Selection of Player");
-
-			if(desired){
-
-				boolean propertyAddCheck = gui.askYesNo("Do you want to add Property","Add Property");
-
-				if(propertyAddCheck){
-					ArrayList<Square> sqs = new ArrayList<Square>();
-					sqs.addAll(Arrays.asList(Board.getInstance().getSquares()[0]));
-					sqs.addAll(Arrays.asList(Board.getInstance().getSquares()[1]));
-					sqs.addAll(Arrays.asList(Board.getInstance().getSquares()[2]));
-					Property pr = (Property) gui.askSelection("Select the property which you want to add.","Add Property", sqs.toArray(new Square[1]));
-
-					pl.deposit(pr.getPrice());
-
-					pl.buyProperty(pr);
-
-				}
-
-				boolean moneyModifyCheck = gui.askYesNo("Do you want to change money","Change Money");
-
-				if(moneyModifyCheck){
-
-					int money=Integer.parseInt(gui.askForInput("Enter the number of the players","Number of Players"));
-
-					pl.setBalance(money);
-
-				}
-
-				boolean propertyBuildingAddCheck = gui.askYesNo("Do you want to build an upgrade to your Properties","Build Upgrade");
-
-				if(propertyBuildingAddCheck){
-					ArrayList<Square> cumulation = new ArrayList<Square>();
-					cumulation.addAll(currentPlayer.getEstates());
-					cumulation.addAll(currentPlayer.getTransitStations());
-					cumulation.addAll(currentPlayer.getCabCompanies());
-					cumulation.addAll(currentPlayer.getUtilities());
-					Property p =gui.askSelection("Select the property which you want to upgrade:","Upgrade Property",cumulation.toArray(new Property[1]));
-
-
-					((Buildable)p).build(pl);
-
-				}
-
-				boolean propertyDowngradeCheck = gui.askYesNo("Do you want to build an upgrade (downgrade?) to your Properties","Build Upgrade");
-
-				if(propertyDowngradeCheck){
-					ArrayList<Square> cumulation = new ArrayList<Square>();
-					cumulation.addAll(currentPlayer.getEstates());
-					cumulation.addAll(currentPlayer.getTransitStations());
-					cumulation.addAll(currentPlayer.getCabCompanies());
-					cumulation.addAll(currentPlayer.getUtilities());
-					Property p =gui.askSelection("Select the property which you want to upgrade:","Upgrade Property",cumulation.toArray(new Property[1]));
-
-
-					((Buildable) p).sellBack(pl);
-
-				}
-
-				boolean positionModCheck = gui.askYesNo("Do you want to change position of the player","Position Change");
-
-				if(positionModCheck){
-					ArrayList<Square> sqs = new ArrayList<Square>();
-					sqs.addAll(Arrays.asList(Board.getInstance().getSquares()[0]));
-					sqs.addAll(Arrays.asList(Board.getInstance().getSquares()[1]));
-					sqs.addAll(Arrays.asList(Board.getInstance().getSquares()[2]));
-					Square sq = (Square) gui.askSelection("Select the square to move on.","Change Location",sqs.toArray(new Square[1]));
-
-					board.moveDirect(pl,sq);
-
-				}
-
-			}
-
-		}
-
-		boolean diceModCheck = gui.askYesNo("Do you want to change values of Dice","Dice Modification");
-
-		if(diceModCheck){
-
+		
 			dice.getInstance().debug=true;
 
 			dice.getInstance().debug1=Integer.parseInt(gui.askForInput("Enter the value for the 1st dice","1st Dice Value"));
@@ -324,7 +340,7 @@ public class Game {
 
 			dice.getInstance().debug3=Integer.parseInt(gui.askForInput("Enter the value for the 3rd Dice","3rd Dice Value"));
 
-		}
+		
 
 	}
 
