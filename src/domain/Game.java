@@ -343,6 +343,13 @@ public class Game {
 		
 
 	}
+	public void triggerCard(){
+		ArrayList<Card> sqs = new ArrayList<Card>();
+		sqs.addAll(Board.getInstance().getChanceCards());
+		sqs.addAll(Board.getInstance().getCommunityCards());
+		Card crd = gui.askSelection("Select the card to be triggered", "Trigger", sqs.toArray(new Card[1]));
+		crd.cardAction();
+	}
 
 
 }
