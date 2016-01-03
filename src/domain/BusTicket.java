@@ -20,7 +20,9 @@ public class BusTicket extends ChanceCard implements Keepable{
 	@Override
 	public void use() {
 		// TODO Auto-generated method stub
-		
+		Player currentPlayer = Game.getInstance().getCurrentPlayer();
+		cardAction();
+		currentPlayer.releaseAllCards();		
 	}
 	
 	@Override
