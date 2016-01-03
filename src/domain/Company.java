@@ -13,6 +13,7 @@ public class Company {
 		this.name = name;
 		this.parValue = parValue;
 		this.dividendValue = dividendValue;	
+		shareList = new ArrayList<Share>();
 		fillShareList();
 		numOfSoldShares = 0;
 	}
