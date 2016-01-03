@@ -29,7 +29,8 @@ public class HollandTunnel extends Square {
 	
 	@Override
 	public String toString() {
-		return "HollandTunnel [destination=" + destination + "]";
+		//return "HollandTunnel [destination=" + destination + "]";
+		return "HollandTunnel";
 	}
 
 	/**
