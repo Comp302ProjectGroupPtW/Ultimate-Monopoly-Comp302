@@ -11,8 +11,7 @@ public class Jail extends Square {
 
 	@Override
 	public void squareAction(Player currentPlayer, Board board) {
-		// TODO Auto-generated method stub
-		currentPlayer.setJail(true);
+		Board.getInstance().goToJail(currentPlayer);
 	}
 
 }
