@@ -70,7 +70,7 @@ public class Board {
 		return companyArray;
 	}
 
-	public Square getHighestRentInLayer(int layer){ //0,1 or 2, iÃ§ten dÄ±ÅŸa respectively.
+	public Square getHighestRentInLayer(int layer){ //0,1 or 2, içten dışa respectively.
 		Square sq = squares[0][0]; //if "go" square returns,there is no owned square with rent.
 		int rent = 1;
 		for (int j = 0; j < squares[layer].length; j++) {
