@@ -44,12 +44,18 @@ public class Board {
 		addToChanceCards(new Hurricane());
 		addToChanceCards(new MardiGras());
 		addToChanceCards(new PropertyTaxes());
+		addToChanceCards(new BusTicket());
+		addToChanceCards(new ChangingLanes());
+		addToChanceCards(new EntertainmentRocks());
 	}
 
 	private void fillCommunityChestCards(){
 		addToCommunityCards(new HouseCondemned());
 		addToCommunityCards(new SpecialOnlinePricing());
 		addToCommunityCards(new StreetRepairs());
+		addToCommunityCards(new VehicleImpounded());
+		addToCommunityCards(new InheritStock());
+		addToCommunityCards(new GeneralRepairs());
 	}
 	private void fillCompanyArray(){		
 		companyArray[0] = new Company("Motion Pictures", 100, new int[] {10,40,90,160,250});
@@ -59,12 +65,12 @@ public class Board {
 		companyArray[4] = new Company("United Railways", 140, new int[] {14,56,126,224,350});
 		companyArray[5] = new Company("American/Acme Motors", 150, new int[] {15,60,135,240,375});
 	}
-	
+
 	public Company[] getCompanyArray(){
 		return companyArray;
 	}
-	
-		public Square getHighestRentInLayer(int layer){ //0,1 or 2, içten dışa respectively.
+
+	public Square getHighestRentInLayer(int layer){ //0,1 or 2, iÃ§ten dÄ±ÅŸa respectively.
 		Square sq = squares[0][0]; //if "go" square returns,there is no owned square with rent.
 		int rent = 1;
 		for (int j = 0; j < squares[layer].length; j++) {
@@ -76,7 +82,16 @@ public class Board {
 		}
 		return sq;
 	}
-	
+
+	public LinkedList<CommunityCard> getCommunityCards() {
+		return communityCards;
+	}
+
+	public LinkedList<ChanceCard> getChanceCards() {
+		return chanceCards;
+	}
+
+
 	public ArrayList<Square> getSideOfSquare(int layer, int position){
 		ArrayList<Square> sqs = new ArrayList<Square>();
 		if(layer == 0){
@@ -162,7 +177,7 @@ public class Board {
 		}
 		return sqs;
 	}
-	
+
 	public ArrayList<Square> getUnownedProperties(){
 		ArrayList<Square> unownedProperties = new ArrayList<Square>();
 		for (int i = 0; i < 3; i++) {
@@ -176,8 +191,8 @@ public class Board {
 		}
 		return unownedProperties;
 	}
-	
-	
+
+
 
 
 	/**
@@ -450,10 +465,10 @@ public class Board {
 		squares[1][9]  = new Estate("Connecticut Avenue", 9, 8, 120, 50, "light blue"); 
 		squares[1][10] = new Misc("Jail(Just Visiting)", 10);
 		squares[1][11] = new Estate("St. Charles Place", 11, 10, 140, 100, "pink");
-		squares[1][12] = new Utility("Electric Company", 12); //(fiyatlar� class�n i�inde)
+		squares[1][12] = new Utility("Electric Company", 12); //(fiyatlarï¿½ classï¿½n iï¿½inde)
 		squares[1][13] = new Estate("States Avenue", 13, 10, 140, 100, "pink");
 		squares[1][14] = new Estate("Virginia Avenue", 14, 12, 160, 100, "pink");
-		TransitStation pennsyl = new TransitStation("Pennsylvania Railroad", 15); //(fiyatlar� class�n i�inde)
+		TransitStation pennsyl = new TransitStation("Pennsylvania Railroad", 15); //(fiyatlarï¿½ classï¿½n iï¿½inde)
 		squares[1][15] = pennsyl;
 		squares[1][16] = new Estate("St. James Place", 16, 14, 180, 100, "orange");
 		squares[1][17] = new CommunityChest(17);
@@ -519,7 +534,7 @@ public class Board {
 		squares[2][3]  = new Estate("Nicollet Avenue", 65, 1, 30, 50, "light pink");
 		squares[2][4]  = new Estate("Hennepin Avenue", 66, 3, 60, 50, "light pink");
 		squares[2][5]  = new Misc("Bus Ticket", 67);
-		squares[2][6]  = new CabCompany("Checker Cab Co.", 68); //name, id (fiyatlar� class�n i�inde)
+		squares[2][6]  = new CabCompany("Checker Cab Co.", 68); //name, id (fiyatlarï¿½ classï¿½n iï¿½inde)
 		squares[2][7]  = reading;
 		squares[2][8]  = new Estate("Esplanade Avenue", 69, 5, 90, 50, "light green");
 		squares[2][9]  = new Estate("Canal Street", 70, 5, 90, 50, "light green");
@@ -769,7 +784,7 @@ public class Board {
 				+ chanceCards + ", map=" + map + ", mh=" + mh + ", repOk()="
 				+ repOk() + "]";
 	}
-	
+
 	/**
 	 * The inner class responsible from moving the {@link Player} objects across the {@link Board}
 	 * and triggering the necessary {@link PassBehavior}s and square actions.
