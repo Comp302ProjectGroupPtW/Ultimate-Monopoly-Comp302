@@ -9,6 +9,8 @@ public class SqueezePlay extends Square {
 		this.setId(id);
 		this.pb= new DoNothingPassBehavior();
 	}
+	public SquuezePlay(){
+	}
 
 	@Override
 	public void squareAction(Player currentPlayer, Board board) {
