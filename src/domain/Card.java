@@ -9,6 +9,10 @@ public abstract class Card {
 	private boolean pending;
 	private boolean keeping;
 	
+	public Card(){
+		
+	}
+	
 	Card(String name, String description){
 		this.name = name;
 		this.description = description;
