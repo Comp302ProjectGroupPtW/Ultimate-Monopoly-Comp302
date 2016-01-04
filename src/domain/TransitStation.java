@@ -86,4 +86,10 @@ public class TransitStation extends Property implements Buildable {
 		GuiHandler.getInstance().updateBuilding(this);
 	}
 
+	@Override
+	public void setBuildings(int buildings) {
+		this.trainDepot=buildings;
+		this.updateRent();	
+	}
+
 }
