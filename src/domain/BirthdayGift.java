@@ -2,6 +2,10 @@ package domain;
 
 
 public class BirthdayGift extends Square {
+	
+	public BirthdayGift(){
+		
+	}
 
 	public BirthdayGift(int id){
 		this.setId(id);
