@@ -73,6 +73,9 @@ public void roll(){//önce mr monopoly, sonra double
 			
 			movesLeft=false;
 			}
+			
+		if(dice.isBus())
+			x = GuiHandler.getInstance().askSelection("Please choose move amount", "Bus Move", new Integer[]{x, dice.getFaceValue1(), dice.getFaceValue2()});
 		Board.getInstance().move(currentPlayer,x); //move x int kadar ilerletip squareActionı çalıştırmalı
 		
 		
