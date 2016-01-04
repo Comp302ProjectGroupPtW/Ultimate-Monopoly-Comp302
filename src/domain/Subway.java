@@ -6,6 +6,8 @@ public class Subway extends Square {
 		this.setName(name);
 		this.setId(id);
 	}
+	public Subway(){
+	}
 	@Override
 	public void pass(Player currentPlayer) {
 		// TODO Auto-generated method stub
