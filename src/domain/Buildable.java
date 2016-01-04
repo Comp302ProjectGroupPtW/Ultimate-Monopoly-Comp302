@@ -11,4 +11,6 @@ public interface Buildable {
 	public void demolish();
 	
 	public void demolishAll();
+	
+	public void setBuildings(int buildings);
 }
