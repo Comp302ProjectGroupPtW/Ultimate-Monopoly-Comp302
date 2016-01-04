@@ -2,6 +2,10 @@ package domain;
 
 
 public class LuxuryTax extends Square {
+	
+	public LuxuryTax(){
+		
+	}
 
 	public LuxuryTax(String name, int id){
 	this.setName(name);
