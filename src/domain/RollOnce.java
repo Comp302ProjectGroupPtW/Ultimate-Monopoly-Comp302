@@ -4,6 +4,10 @@ import java.util.Random;
 
 public class RollOnce extends Square {
 
+	public RollOnce(){
+		
+	}
+	
 	public RollOnce(String name, int id){
 		this.setName(name);
 		this.setId(id);
