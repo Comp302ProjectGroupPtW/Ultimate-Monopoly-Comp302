@@ -2,6 +2,10 @@ package domain;
 
 public class Auction extends Square {
 
+	public Auction(){
+		
+	}
+	
 	public Auction(int id){
 		this.setId(id);
 		this.pb= new DoNothingPassBehavior();
