@@ -17,6 +17,8 @@ public class Share {
 	/**
 	 * @return the company
 	 */
+	 public Share(){
+	 }
 	public Company getCompany() {
 		return company;
 	}
