@@ -137,6 +137,7 @@ public class Estate extends Property implements Buildable{
 
 	public void setBuilding(int building) {
 		this.building = building;
+		this.updateRent();
 	}
 	
 	/**
@@ -195,6 +196,7 @@ public class Estate extends Property implements Buildable{
 	
 	public void setHouses(int houses) {
 		this.houses = houses;
+		this.updateRent();
 	}
 	
 	/**
