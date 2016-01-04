@@ -74,7 +74,9 @@ public class Estate extends Property implements Buildable{
 				this.setMonopoly(this.findMonopoly());
 				this.setMajority(this.findMajority());
 				this.updateRent();
-			} 
+			} else{
+				AuctionHandler.getInstance().makeAuction(this);
+			}
 		}
 		else {
 			currentPlayer.payRent(this);
@@ -135,7 +137,7 @@ public class Estate extends Property implements Buildable{
 	 * @effects sets the number of buildings of the estate as an integer
 	 */
 
-	public void setBuilding(int building) {
+	public void setBuildings(int building) {
 		this.building = building;
 		this.updateRent();
 	}
@@ -196,7 +198,6 @@ public class Estate extends Property implements Buildable{
 	
 	public void setHouses(int houses) {
 		this.houses = houses;
-		this.updateRent();
 	}
 	
 	/**
@@ -244,7 +245,7 @@ public class Estate extends Property implements Buildable{
 	 * the currentPlayer by the housePrice
 	 */
 	public void sellBack(Player currentPlayer) {
-		if(currentPlayer == this.getOwner() && this.houses>=1){
+		if(this.houses>=1){
 			currentPlayer.deposit(housePrice/2);
 			this.houses--;
 			this.updateRent();
@@ -338,5 +339,6 @@ public class Estate extends Property implements Buildable{
 		}
 		GuiHandler.getInstance().updateBuilding(this);
 	}
+
 
 }
