@@ -2,6 +2,10 @@ package domain;
 
 
 public class Go extends Square {
+	
+	public Go(){
+		
+	}
 
 	public Go(String name, int id){
 		this.setName(name);
@@ -11,7 +15,7 @@ public class Go extends Square {
 
 	@Override
 	public void squareAction(Player currentPlayer, Board board) {
-		//Pass olduğu için boş
+		//Pass olduÄŸu iÃ§in boÅŸ
 	}
 
 }
