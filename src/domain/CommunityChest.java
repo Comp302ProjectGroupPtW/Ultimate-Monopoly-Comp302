@@ -3,6 +3,9 @@ package domain;
 
 public class CommunityChest extends Square {
 
+	public CommunityChest(){
+		
+	}
 	public CommunityChest(int id){
 		this.setId(id);
 		this.pb= new DoNothingPassBehavior();
