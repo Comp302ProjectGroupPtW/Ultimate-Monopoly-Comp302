@@ -130,6 +130,13 @@ public class CabCompany extends Property implements Buildable {
 		GuiHandler.getInstance().updateBuilding(this);
 	}
 
+	@Override
+	public void setBuildings(int buildings) {
+		// TODO Auto-generated method stub
+		this.cabStands=buildings;
+		this.updateRent();
+	}
+
 }
 
 
