@@ -21,6 +21,11 @@ public class HollandTunnel extends Square {
 	 * @param name name of the tunnel as a string
 	 * @param id id of the tunnel as an integer
 	 */
+	
+	public HollandTunnel(){
+		
+	}
+	
 	public HollandTunnel(String name, int id){
 		this.setName(name);
 		this.setId(id);
@@ -29,8 +34,7 @@ public class HollandTunnel extends Square {
 	
 	@Override
 	public String toString() {
-		//return "HollandTunnel [destination=" + destination + "]";
-		return "HollandTunnel";
+		return this.getDestination().getName();
 	}
 
 	/**
