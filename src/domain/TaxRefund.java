@@ -8,6 +8,8 @@ public class TaxRefund extends Square {
 		this.setId(id);
 		this.pb= new DoNothingPassBehavior();
 	}
+	public TaxRefund(){
+	}
 
 	@Override
 	public void squareAction(Player currentPlayer, Board board) {
