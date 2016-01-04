@@ -3,6 +3,10 @@ package domain;
 
 public class Misc extends Square {
 
+	public Misc(){
+		
+	}
+	
 	public Misc(String name, int id){
 		this.setName(name);
 		this.setId(id);
