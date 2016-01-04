@@ -29,6 +29,8 @@ public class AppWindow extends JFrame {
 	private JButton buyBuilding;
 	private JButton mortgage;
 	private JButton debug;
+	private JButton triggerCard;
+	private JButton debugger;
 	private JButton endTurn;
 
 	private GuiHandler handler;
@@ -51,7 +53,7 @@ public class AppWindow extends JFrame {
 	public AppWindow(GuiHandler guiHandler, GuiSquare[][] squares, GuiPlayer[] players) {
 		this.handler = guiHandler;
 		
-		frame = new JFrame();
+		frame = new JFrame("Ultimate Monopoly");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(100, 100, 900, 600);
 		frame.setPreferredSize(new Dimension(1600, 850));
@@ -88,6 +90,7 @@ public class AppWindow extends JFrame {
 		});
 		
 		mrM = new JButton("Mr. Monopoly");
+		mrM.setEnabled(false); // Start as disabled.
 		mrM.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				SwingWorker<Void, Void> sw = new SwingWorker<Void, Void>() {
@@ -168,7 +171,7 @@ public class AppWindow extends JFrame {
 			}
 		});
 		
-		debug = new JButton("Debug");
+		debug = new JButton("Manipulate Dice");
 		debug.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				SwingWorker<Void, Void> sw = new SwingWorker<Void, Void>() {
@@ -177,6 +180,48 @@ public class AppWindow extends JFrame {
 					protected Void doInBackground() throws Exception {
 						
 						handler.debug();
+						
+						return null;
+					}
+				};
+			
+					sw.execute();
+				
+				
+			}
+		});
+		
+		
+		triggerCard = new JButton("Trigger Card");
+		triggerCard.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				SwingWorker<Void, Void> sw = new SwingWorker<Void, Void>() {
+
+					@Override
+					protected Void doInBackground() throws Exception {
+						
+						handler.userTriggerCard();
+						
+						return null;
+					}
+				};
+			
+					sw.execute();
+				
+				
+			}
+		});
+		
+		
+		debugger = new JButton("Open Debugger");
+		debugger.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				SwingWorker<Void, Void> sw = new SwingWorker<Void, Void>() {
+
+					@Override
+					protected Void doInBackground() throws Exception {
+						
+						//Do something here
 						
 						return null;
 					}
@@ -220,6 +265,7 @@ public class AppWindow extends JFrame {
 		bottomPanel.add(buyBuilding);
 		bottomPanel.add(mortgage);
 		bottomPanel.add(debug);
+		bottomPanel.add(triggerCard);
 		bottomPanel.add(endTurn);
 
 		gamePanel.initBoard(squares);
