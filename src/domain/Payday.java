@@ -3,6 +3,10 @@ package domain;
 
 
 public class Payday extends Square {
+	
+	public Payday(){
+		
+	}
 
 	public Payday(int id){
 		this.setId(id);
