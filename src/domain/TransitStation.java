@@ -13,6 +13,8 @@ public class TransitStation extends Property implements Buildable {
 		this.setRent(25);
 		this.pb= new TransitStationPassBehavior();
 	}
+	public TransitStation(){
+	}
 
 	@Override
 	public void squareAction(Player currentPlayer, Board board) {
