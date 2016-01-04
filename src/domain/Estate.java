@@ -19,6 +19,10 @@ public class Estate extends Property implements Buildable{
 	private int housePrice;
 	private int houses;
 	
+	public Estate(){
+		
+	}
+	
 	/**
 	 * Creates an Estate object with a name, id, rent, price, housePrice, color
 	 * @param name name of the estate as a string
