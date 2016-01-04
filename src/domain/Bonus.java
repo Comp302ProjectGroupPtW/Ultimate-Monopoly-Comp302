@@ -2,6 +2,10 @@ package domain;
 
 
 public class Bonus extends Square {
+	
+	public Bonus(){
+		
+	}
 
 	public Bonus(String name, int id){
 		this.setName(name);
