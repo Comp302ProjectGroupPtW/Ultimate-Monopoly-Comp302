@@ -230,9 +230,7 @@ public class Estate extends Property implements Buildable{
 
 	@Override
 	public String toString() {
-		return "Estates [color=" + color + ", monopoly=" + monopoly
-				+ ", majority=" + majority + ", building=" + building
-				+ ", housePrice=" + housePrice + ", houses=" + houses + "]";
+		return this.getName();
 	}
 
 	@Override
