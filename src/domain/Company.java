@@ -8,6 +8,10 @@ public class Company {
 	private int numOfSoldShares;
 	private ArrayList<Share> shareList;
 	
+	public Company(){
+	
+	}
+	
 	
 	public Company(String name,int parValue, int[] dividendValue){
 		this.name = name;
