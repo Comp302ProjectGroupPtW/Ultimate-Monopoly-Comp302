@@ -10,6 +10,11 @@ public class Share {
 	 * @param owner
 	 * @param mortgaged
 	 */
+	
+	public Share(){
+		
+	}
+	
 	public Share(Company company) {
 		this.company = company;
 		setMortgaged(false);
