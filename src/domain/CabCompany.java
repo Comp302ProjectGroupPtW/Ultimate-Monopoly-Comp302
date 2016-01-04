@@ -7,6 +7,7 @@ package domain;
 public class CabCompany extends Property implements Buildable {
 
 	private int cabStands;
+	
 	public CabCompany() {
 		// TODO Auto-generated constructor stub
 	}
