@@ -574,8 +574,7 @@ public class Player {
 	}
 	
 	public void transferShare(Company co, Player targetPlayer){
-		co.sellShare(this);
-		co.buyShare(targetPlayer);
+		co.sellShare(this, targetPlayer);
 	}
 	
 	public void mortgagedShare(Company co){
@@ -773,33 +772,9 @@ public class Player {
 	 * Returns the list containing the cards of the player.
 	 * @return the card list
 	 */
-	public ArrayList<Card> getCardList() {
-		return cardList;
+	public Card[] getCardList() {
+		return (Card[])cardList.toArray(new Card[cardList.size()]);
 	}
-
-	/**
-	 * Returns the list containing the keepable card list.
-	 * @return the keepable card list
-	 */
-	public Card[] getKeepableCardList() {
-		ArrayList keepList = new ArrayList();
-
-		for(int i = 0; i < cardList.size(); i ++){
-
-			Card temp = getCardList().get(i);
-
-			if(temp.isKeeping()){
-				keepList.add(temp);
-			}
-		}
-
-		return (Card[])keepList.toArray(new Card[keepList.size()]);
-	}
-	/*
-	public void setCardList(ArrayList<Card> cardl) {
-		cardList = cardl;
-	}
-	 */
 
 	/**
 	 * Adds the card to the player's list of cards
@@ -821,9 +796,9 @@ public class Player {
 	 * Releases all the cards the player holds.
 	 */
 	public void releaseAllCards() {
-		int size = getCardList().size();
+		int size = cardList.size();
 		for (int i = 0; i < size; i++) {
-			removeCard(getCardList().get(i));
+			removeCard(cardList.get(i));
 		}
 	}
 
