@@ -4,37 +4,68 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAnyElement;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlIDREF;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
 /**
  *  Player class is a representation of a player of the monopoly game. It holds the players id for internal uses, has the player's name and the balance. 
  *
  */
-
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.NONE)
+//@XmlJavaTypeAdapter(SaveLoadHandler.RefAdapter.class)
 public class Player {
-
+	@XmlElement
 	private String name;
 	private int id;
+	@XmlElement
 	private int balance;
 	private Game game;
 
+	@XmlElementWrapper(name = "playerLocationObservers")
+	@XmlAnyElement
 	private ArrayList<PlayerLocationObserver> observers = new ArrayList<PlayerLocationObserver>();
 
+	@XmlElement
 	private boolean bankrupt;
+	@XmlElement
 	private boolean inJail;
+	@XmlElement
 	private boolean finished;
 
+	@XmlElement
 	private int layer;
+	@XmlElement
 	private int position;
+	@XmlIDREF
 	private Square location;
-
+	
+	@XmlElement
 	private HashMap<String, Integer> estateHash = new HashMap<String, Integer>();
+	@XmlElement
 	private ArrayList<String> majorEstates = new ArrayList<String>();
+	@XmlElement
 	private ArrayList<String> monopolyEstates = new ArrayList<String>();
 
+	@XmlIDREF
 	private ArrayList<Estate> estates = new ArrayList<Estate>();
+	@XmlIDREF
 	private ArrayList<TransitStation> transitStations = new ArrayList<TransitStation>();
+	@XmlIDREF
 	private ArrayList<Utility> utilities = new ArrayList<Utility>();
+	@XmlIDREF
 	private ArrayList<CabCompany> cabCompanies = new ArrayList<CabCompany>();
+	@XmlElement
 	private ArrayList<Card> cardList = new ArrayList<Card>();
+	private boolean control = false;
 
 	public Player() {
 
@@ -258,16 +289,7 @@ public class Player {
 
 	@Override
 	public String toString() {
-		return "Player [name=" + name + ", id=" + id + ", balance=" + balance
-				+ ", observers=" + observers + ", bankrupt=" + bankrupt
-				+ ", inJail=" + inJail + ", finished=" + finished + ", layer="
-				+ layer + ", position=" + position + ", location=" + location
-				+ ", estateHash=" + estateHash + ", majorEstates="
-				+ majorEstates + ", monopolyEstates=" + monopolyEstates
-				+ ", estates=" + estates + ", transitStations="
-				+ transitStations + ", utilities=" + utilities
-				+ ", cabCompanies=" + cabCompanies + ", cardList=" + cardList
-				+ "]";
+		return name;
 	}
 
 	/**  
@@ -481,6 +503,13 @@ public class Player {
 		}else{
 			return false;
 		}
+	}
+	
+	public boolean getControl() {
+		return control ;
+	}
+	public void setControl(boolean control) {
+		this.control = control;
 	}
 
 	/*
@@ -772,9 +801,33 @@ public class Player {
 	 * Returns the list containing the cards of the player.
 	 * @return the card list
 	 */
-	public Card[] getCardList() {
-		return (Card[])cardList.toArray(new Card[cardList.size()]);
+	public ArrayList<Card> getCardList() {
+		return cardList;
 	}
+
+	/**
+	 * Returns the list containing the keepable card list.
+	 * @return the keepable card list
+	 */
+	public Card[] getKeepableCardList() {
+		ArrayList keepList = new ArrayList();
+
+		for(int i = 0; i < cardList.size(); i ++){
+
+			Card temp = getCardList().get(i);
+
+			if(temp.isKeeping()){
+				keepList.add(temp);
+			}
+		}
+
+		return (Card[])keepList.toArray(new Card[keepList.size()]);
+	}
+	/*
+	public void setCardList(ArrayList<Card> cardl) {
+		cardList = cardl;
+	}
+	 */
 
 	/**
 	 * Adds the card to the player's list of cards
@@ -796,9 +849,9 @@ public class Player {
 	 * Releases all the cards the player holds.
 	 */
 	public void releaseAllCards() {
-		int size = cardList.size();
+		int size = getCardList().size();
 		for (int i = 0; i < size; i++) {
-			removeCard(cardList.get(i));
+			removeCard(getCardList().get(i));
 		}
 	}
 
@@ -833,6 +886,15 @@ public class Player {
 		}
 
 		return true;
+	}
+	
+	@XmlID
+	public String getXmlId(){
+		return String.valueOf(id);
+	}
+	
+	public void setXmlId(String id){
+		this.id = Integer.parseInt(id);
 	}
 
 }

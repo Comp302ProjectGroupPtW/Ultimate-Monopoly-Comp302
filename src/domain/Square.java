@@ -1,15 +1,27 @@
 package domain;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+@XmlTransient
+//@XmlJavaTypeAdapter(SaveLoadHandler.RefAdapter.class)
+@XmlSeeAlso({Property.class, Bonus.class, CommunityChest.class, Go.class, HollandTunnel.class, Jail.class,
+	LuxuryTax.class, Misc.class, Payday.class, RollOnce.class, StockExchange.class, Subway.class, TaxRefund.class})
 public abstract class Square {
 
+	@XmlElement
 	private String name;
 	private int id;
+	@XmlTransient
 	protected PassBehavior pb;
 	
 	public Square(){
 		this.name=null;
 		this.id=0;
+		this.pb = new DoNothingPassBehavior();
 	}
 
 	public String getName() {
@@ -39,5 +51,13 @@ public abstract class Square {
 		return  name;
 	}
 	
+	@XmlID
+	public String getXmlId(){
+		return String.valueOf(id);
+	}
+	
+	public void setXmlId(String id){
+		this.id = Integer.parseInt(id);
+	}
 	
 }

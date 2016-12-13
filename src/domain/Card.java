@@ -1,17 +1,19 @@
 package domain;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlTransient;
 
 public abstract class Card {
 	
+	@XmlID
 	private String name;
+	@XmlElement
 	private String description;
 	
 	private boolean pending;
+	@XmlElement
 	private boolean keeping;
-	
-	public Card(){
-		
-	}
 	
 	Card(String name, String description){
 		this.name = name;
@@ -47,5 +49,11 @@ public abstract class Card {
 	}
 	
 	public abstract void cardAction();
+
+	@Override
+	public String toString() {
+		return name + " " +getClass().getSimpleName() + ", pending=" + pending + ", keeping="
+				+ keeping + "]";
+	}
 	
 }

@@ -1,5 +1,10 @@
 package domain;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
 import domain.Board;
 import domain.DoNothingPassBehavior;
 import domain.Player;
@@ -13,7 +18,15 @@ import domain.Square;
  *
  */
 
+@XmlAccessorType(XmlAccessType.NONE)
 public class HollandTunnel extends Square {
+	
+	public HollandTunnel() {
+		super();
+		// TODO Auto-generated constructor stub
+		this.pb= new DoNothingPassBehavior();
+	}
+
 	private Square destination;
 	
 	/**
@@ -21,11 +34,6 @@ public class HollandTunnel extends Square {
 	 * @param name name of the tunnel as a string
 	 * @param id id of the tunnel as an integer
 	 */
-	
-	public HollandTunnel(){
-		
-	}
-	
 	public HollandTunnel(String name, int id){
 		this.setName(name);
 		this.setId(id);
@@ -34,7 +42,7 @@ public class HollandTunnel extends Square {
 	
 	@Override
 	public String toString() {
-		return this.getDestination().getName();
+		return "HollandTunnel [destination=" + destination.getName() + "]";
 	}
 
 	/**

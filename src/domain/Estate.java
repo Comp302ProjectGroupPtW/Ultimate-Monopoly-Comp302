@@ -1,6 +1,10 @@
 package domain;
 import java.util.ArrayList;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * 
  * @author Elif
@@ -10,6 +14,8 @@ import java.util.ArrayList;
  * estate is also called by this class.
  *
  */
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Estate extends Property implements Buildable{
 
 	private String color;
@@ -20,7 +26,7 @@ public class Estate extends Property implements Buildable{
 	private int houses;
 	
 	public Estate(){
-		
+		this.pb= new DoNothingPassBehavior();
 	}
 	
 	/**

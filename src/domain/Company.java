@@ -1,17 +1,24 @@
 package domain;
 import java.util.ArrayList;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlIDREF;
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Company {
+	@XmlID
 	private String name;
 	private int parValue;
 	private int[] dividendValue;
 	private int numOfSoldShares;
+	@XmlIDREF
 	private ArrayList<Share> shareList;
 	
-	public Company(){
-	
+	@SuppressWarnings("unused")
+	private Company(){
+		//For JAXB
 	}
-	
 	
 	public Company(String name,int parValue, int[] dividendValue){
 		this.name = name;
@@ -31,7 +38,7 @@ public class Company {
 		return name;
 	}
 
-	public int getPlayerShareAmount(Player player){ //Player'Ã½n bu companyde kaÃ§ tane share'i olduÄ‘unu dÃ¶ndÃ¼rÃ¼yor.
+	public int getPlayerShareAmount(Player player){ //Player'ýn bu companyde kaç tane share'i olduðunu döndürüyor.
 		int count = 0;
 		for (int i = 0; i < numOfSoldShares; i++) {
 			Player owner = shareList.get(i).getOwner();
@@ -39,7 +46,7 @@ public class Company {
 		}
 		return count;
 	}
-	public int getPlayerMoneyReceiveAmount(Player player){ //Player'Ã½n kaÃ§ para alacaÄ‘Ã½nÃ½ dÃ¶ndÃ¼rÃ¼yor. EÄ‘er -1 dÃ¶nerse iÅ£lem yapmayÃ½p playerÃ½n bu companyde share'i yok dersin.
+	public int getPlayerMoneyReceiveAmount(Player player){ //Player'ýn kaç para alacaðýný döndürüyor. Eðer -1 dönerse iþlem yapmayýp playerýn bu companyde share'i yok dersin.
 		int count = getPlayerShareAmount(player);
 		if(count>0) return dividendValue[count-1];
 		return -1; 		
@@ -108,8 +115,8 @@ public class Company {
 	 */
 	@Override
 	public String toString() {
-		return "Company [Name=" + name + ", Par Value=" + parValue + ", Loan Value=" + parValue/2 + ", Number of Sold Shares="
-				+ numOfSoldShares + ", Has Buyable Share ?:" + hasBuyableShare() + "]";
+		return name + ", Par Value=" + parValue + ", Loan Value=" + parValue/2 + ", Number of Sold Shares="
+				+ numOfSoldShares + ", Has Buyable Share ?:" + hasBuyableShare();
 	}
 	// EFFECTS: Returns true if the rep invariant holds 	
 	// for this; otherwise returns false. 

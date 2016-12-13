@@ -16,6 +16,7 @@ public class Hurricane extends ChanceCard {
 
 	@Override
 	public void cardAction() { 
+		GuiHandler.getInstance().showMessage(getDescription(), "Card");
 		String[] str = Board.getInstance().getColorArray();
 		Player[] players = Game.getInstance().getPlayers();
 		GuiHandler hand = GuiHandler.getInstance();
@@ -31,6 +32,6 @@ public class Hurricane extends ChanceCard {
 				}
 			}
 		}
-		GuiHandler.getInstance().showMessage(getDescription(), "Card");
+		
 	}
 }

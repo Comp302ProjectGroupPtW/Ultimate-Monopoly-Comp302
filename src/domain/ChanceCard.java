@@ -1,13 +1,11 @@
 package domain;
 
+import javax.xml.bind.annotation.XmlTransient;
 
+@XmlTransient
 public abstract class ChanceCard extends Card {
 	
-	public ChanceCard() {
-		// TODO Auto-generated constructor stub
-	}
-	
-	ChanceCard(String name, String description) {
+	public ChanceCard(String name, String description) {
 		super(name, description);
 		
 	}

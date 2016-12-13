@@ -2,10 +2,6 @@ package domain;
 
 
 public class IncomeTax extends Square {
-	
-	public IncomeTax(){
-		
-	}
 
 	public IncomeTax(String name, int id){
 		this.setName(name);
@@ -25,6 +21,10 @@ public class IncomeTax extends Square {
 			board.addToPool(200);
 		}
 
+	}
+
+	public IncomeTax() {
+		super();
 	}
 
 }

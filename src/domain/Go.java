@@ -2,11 +2,13 @@ package domain;
 
 
 public class Go extends Square {
-	
-	public Go(){
-		
-	}
 
+	@SuppressWarnings("unused")
+	private Go() {
+		// For JAXB
+		this.pb= new GoPassBehavior();
+	}
+	
 	public Go(String name, int id){
 		this.setName(name);
 		this.setId(id);
@@ -15,7 +17,7 @@ public class Go extends Square {
 
 	@Override
 	public void squareAction(Player currentPlayer, Board board) {
-		//Pass olduÄŸu iÃ§in boÅŸ
+		//Pass olduğu için boş
 	}
 
 }

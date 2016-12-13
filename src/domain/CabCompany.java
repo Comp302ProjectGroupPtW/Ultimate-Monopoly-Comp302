@@ -1,11 +1,13 @@
 package domain;
 
+import javax.xml.bind.annotation.XmlElement;
+
 
 /**
  * 
  */
 public class CabCompany extends Property implements Buildable {
-
+	@XmlElement
 	private int cabStands;
 	
 	public CabCompany() {
@@ -131,7 +133,7 @@ public class CabCompany extends Property implements Buildable {
 		GuiHandler.getInstance().updateBuilding(this);
 	}
 
-	@Override
+
 	public void setBuildings(int buildings) {
 		// TODO Auto-generated method stub
 		this.cabStands=buildings;
@@ -139,5 +141,4 @@ public class CabCompany extends Property implements Buildable {
 	}
 
 }
-
 

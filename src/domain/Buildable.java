@@ -1,7 +1,10 @@
 package domain;
 
+import javax.xml.bind.annotation.XmlElement;
+
 public interface Buildable {
 	
+	@XmlElement //Not Sure
 	public int getBuildings();
 
 	public void build(Player currentPlayer);

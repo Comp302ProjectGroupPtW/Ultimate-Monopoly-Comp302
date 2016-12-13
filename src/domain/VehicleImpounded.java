@@ -11,7 +11,7 @@ public class VehicleImpounded extends CommunityCard {
 
 	@Override
 	public void cardAction() {
-		// TODO Auto-generated method stub
+		GuiHandler.getInstance().showMessage(getDescription(), "Card");
 		Player currentPlayer = Game.getInstance().getCurrentPlayer();
 		
 		currentPlayer.withdraw(50);
@@ -19,9 +19,9 @@ public class VehicleImpounded extends CommunityCard {
 		Board.getInstance().addToPool(50);
 		Board.getInstance().moveDirectWithoutSquareAction(currentPlayer, destination);
 		
-		Game.getInstance().changeThePlayer();
+		Game.getInstance().getCurrentPlayer().setControl(true);
 		
-		GuiHandler.getInstance().showMessage(getDescription(), "Card");
+		
 	}
 
 }

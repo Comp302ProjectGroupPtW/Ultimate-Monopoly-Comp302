@@ -11,7 +11,7 @@ public class EntertainmentRocks extends ChanceCard {
 
 	@Override
 	public void cardAction() {
-		// TODO Auto-generated method stub
+		GuiHandler.getInstance().showMessage(getDescription(), "Card");
 		for(Player p: Game.getInstance().getPlayers()){
 			for(Company c: Board.getInstance().getCompanyArray()){
 				if(c.getName().equals("Motion Pictures") || c.getName().equals("General Radio"))
@@ -21,6 +21,6 @@ public class EntertainmentRocks extends ChanceCard {
 			}
 		}
 		
-		GuiHandler.getInstance().showMessage(getDescription(), "Card");
+		
 	}
 }

@@ -10,8 +10,6 @@ public class StockExchange extends Square {
 		this.setId(id);
 		this.pb= new DoNothingPassBehavior();
 	}
-	public StockExchange(){
-	}
 
 	@Override
 	public void squareAction(Player currentPlayer, Board board) {
@@ -41,6 +39,11 @@ public class StockExchange extends Square {
 			AuctionHandler.getInstance().makeAuctionShare(c);
 		}
 
+	}
+
+	public StockExchange() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 }

@@ -2,14 +2,13 @@ package domain;
 
 public class Auction extends Square {
 
-	public Auction(){
-		
-	}
-	
 	public Auction(int id){
 		this.setId(id);
 		this.pb= new DoNothingPassBehavior();
 		setName("Auction");
+	}
+	public Auction() {
+		
 	}
 	
 	@Override
@@ -28,7 +27,7 @@ public class Auction extends Square {
 
 	private Property chooseUnownedProperty() {
 		// TODO Auto-generated method stub
-		Property[] unowned = Board.getInstance().findUnownedProperty();
+		Property[] unowned = Board.getInstance().getUnownedProperties().toArray(new Property[0]);
 		Property select = GuiHandler.getInstance().askSelection("Which property do you want to put up for auction?", "Auction", unowned);
 		return select;
 	}

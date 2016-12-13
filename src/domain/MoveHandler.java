@@ -1,6 +1,6 @@
 package domain;
 
-public class MoveHandler {
+/*public class MoveHandler {
 
 	private Board board;
 	private int layer;
@@ -118,4 +118,4 @@ public class MoveHandler {
 	private void setPosition(int position) {
 		this.position = position;
 	}
-}
+}*/

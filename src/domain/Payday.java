@@ -3,10 +3,6 @@ package domain;
 
 
 public class Payday extends Square {
-	
-	public Payday(){
-		
-	}
 
 	public Payday(int id){
 		this.setId(id);
@@ -18,6 +14,11 @@ public class Payday extends Square {
 	public void squareAction(Player currentPlayer, Board board) {
 		// TODO Auto-generated method stub
 		//Do nothing
+	}
+
+	public Payday() {
+		super();
+		this.pb= new PayDayPassBehavior();
 	}
 
 }

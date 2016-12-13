@@ -12,7 +12,7 @@ public class InheritStock extends CommunityCard {
 
 	@Override
 	public void cardAction() {
-		// TODO Auto-generated method stub
+		GuiHandler.getInstance().showMessage(getDescription(), "Card");
 		ArrayList<Company> available=new ArrayList<Company>();
 		Player currentPlayer = Game.getInstance().getCurrentPlayer();
 
@@ -25,7 +25,7 @@ public class InheritStock extends CommunityCard {
 
 		Company c = GuiHandler.getInstance().askSelection("Which company share do you want to buy?", "Buy Share", fin);
 		currentPlayer.buyShare(c);
-		GuiHandler.getInstance().showMessage(getDescription(), "Card");
+		
 	}
 }
 

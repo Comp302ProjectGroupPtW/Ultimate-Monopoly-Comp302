@@ -13,6 +13,7 @@ public class PropertyTaxes extends ChanceCard {
 
 	@Override
 	public void cardAction() {
+		GuiHandler.getInstance().showMessage(getDescription(), "Card");
 		Player currentPl = Game.getInstance().getCurrentPlayer();
 		Board board = Board.getInstance();
 		int count = 0;
@@ -36,7 +37,7 @@ public class PropertyTaxes extends ChanceCard {
 		count*=25;
 		currentPl.withdraw(count);
 		board.addToPool(count);
-		GuiHandler.getInstance().showMessage(getDescription(), "Card");
+		
 	}
 
 }

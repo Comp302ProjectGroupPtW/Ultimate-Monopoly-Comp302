@@ -2,14 +2,15 @@ package domain;
 
 
 public class Bonus extends Square {
-	
-	public Bonus(){
-		
-	}
 
 	public Bonus(String name, int id){
 		this.setName(name);
 		this.setId(id);
+		this.pb= new BonusPassBehavior();
+	}
+
+	public Bonus() {
+		super();
 		this.pb= new BonusPassBehavior();
 	}
 
