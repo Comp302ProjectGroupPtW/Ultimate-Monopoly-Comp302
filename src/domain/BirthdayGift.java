@@ -2,14 +2,11 @@ package domain;
 
 
 public class BirthdayGift extends Square {
-	
-	public BirthdayGift(){
-		
-	}
 
 	public BirthdayGift(int id){
 		this.setId(id);
 		this.pb= new DoNothingPassBehavior();
+		setName("Birthday Gift");
 	}
 
 	@Override
@@ -22,6 +19,11 @@ public class BirthdayGift extends Square {
 		else {
 			Board.getInstance().moveDirect(currentPlayer, Board.getInstance().getSquareById(68));
 		}
+	}
+
+	public BirthdayGift() {
+		super();
+
 	}
 
 }

@@ -12,7 +12,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingWorker;
 
+import domain.Game;
 import domain.GuiHandler;
+import domain.SaveLoadHandler;
 
 
 
@@ -22,7 +24,7 @@ public class AppWindow extends JFrame {
 
 	private JFrame frame;
 	private GamePanel gamePanel;
-	
+
 	private JButton rollDice;
 	private JButton mrM;
 	private JButton sellBelonging;
@@ -31,12 +33,14 @@ public class AppWindow extends JFrame {
 	private JButton debug;
 	private JButton triggerCard;
 	private JButton debugger;
+	private JButton save;
+	private JButton load;
 	private JButton endTurn;
 
 	private GuiHandler handler;
-	
+
 	public void init(){
-			EventQueue.invokeLater(new Runnable() {
+		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					frame.setVisible(true);
@@ -52,7 +56,7 @@ public class AppWindow extends JFrame {
 	 */
 	public AppWindow(GuiHandler guiHandler, GuiSquare[][] squares, GuiPlayer[] players) {
 		this.handler = guiHandler;
-		
+
 		frame = new JFrame("Ultimate Monopoly");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(100, 100, 900, 600);
@@ -63,12 +67,12 @@ public class AppWindow extends JFrame {
 
 		gamePanel = new GamePanel();
 
-		
+
 		JScrollPane scrollPane = new JScrollPane(gamePanel);
 		frame.getContentPane().add(scrollPane, BorderLayout.CENTER);
 
 		// *** Buttons ***
-		
+
 		rollDice = new JButton("Roll Dice");
 		rollDice.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -82,13 +86,13 @@ public class AppWindow extends JFrame {
 						return null;
 					}
 				};
-			
-					sw.execute();
-				
-				
+
+				sw.execute();
+
+
 			}
 		});
-		
+
 		mrM = new JButton("Mr. Monopoly");
 		mrM.setEnabled(false); // Start as disabled.
 		mrM.addActionListener(new ActionListener() {
@@ -97,20 +101,20 @@ public class AppWindow extends JFrame {
 
 					@Override
 					protected Void doInBackground() throws Exception {
-						
+
 						handler.userMrM();
-						
+
 						return null;
 					}
 				};
-			
-					sw.execute();
-				
-				
+
+				sw.execute();
+
+
 			}
 		});
-		
-		
+
+
 		sellBelonging = new JButton("Sell Belonging");
 		sellBelonging.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -118,19 +122,19 @@ public class AppWindow extends JFrame {
 
 					@Override
 					protected Void doInBackground() throws Exception {
-						
+
 						handler.userSellBelonging();
-						
+
 						return null;
 					}
 				};
-			
-					sw.execute();
-				
-				
+
+				sw.execute();
+
+
 			}
 		});
-		
+
 		buyBuilding = new JButton("Buy Building");
 		buyBuilding.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -138,19 +142,19 @@ public class AppWindow extends JFrame {
 
 					@Override
 					protected Void doInBackground() throws Exception {
-						
+
 						handler.userBuyBuilding();
-						
+
 						return null;
 					}
 				};
-			
-					sw.execute();
-				
-				
+
+				sw.execute();
+
+
 			}
 		});
-		
+
 		mortgage = new JButton("Mortgage");
 		mortgage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -158,19 +162,19 @@ public class AppWindow extends JFrame {
 
 					@Override
 					protected Void doInBackground() throws Exception {
-						
+
 						handler.userMortgage();
-						
+
 						return null;
 					}
 				};
-			
-					sw.execute();
-				
-				
+
+				sw.execute();
+
+
 			}
 		});
-		
+
 		debug = new JButton("Manipulate Dice");
 		debug.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -178,20 +182,20 @@ public class AppWindow extends JFrame {
 
 					@Override
 					protected Void doInBackground() throws Exception {
-						
+
 						handler.debug();
-						
+
 						return null;
 					}
 				};
-			
-					sw.execute();
-				
-				
+
+				sw.execute();
+
+
 			}
 		});
-		
-		
+
+
 		triggerCard = new JButton("Trigger Card");
 		triggerCard.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -199,20 +203,20 @@ public class AppWindow extends JFrame {
 
 					@Override
 					protected Void doInBackground() throws Exception {
-						
+
 						handler.userTriggerCard();
-						
+
 						return null;
 					}
 				};
-			
-					sw.execute();
-				
-				
+
+				sw.execute();
+
+
 			}
 		});
-		
-		
+
+
 		debugger = new JButton("Open Debugger");
 		debugger.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -220,20 +224,59 @@ public class AppWindow extends JFrame {
 
 					@Override
 					protected Void doInBackground() throws Exception {
-						
+
 						//Do something here
-						
+
 						return null;
 					}
 				};
-			
-					sw.execute();
-				
-				
+
+				sw.execute();
+
+
 			}
 		});
+
+
+		save = new JButton("Save Game");
+		save.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				SwingWorker<Void, Void> sw = new SwingWorker<Void, Void>() {
+
+					@Override
+					protected Void doInBackground() throws Exception {
+
+						SaveLoadHandler.getInstance().save(true);
+
+						return null;
+					}
+				};
+
+				sw.execute();
+
+
+			}
+		});
+
+
+		load = new JButton("Load Game");
+		load.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				SaveLoadHandler.getInstance().load("saved_game.xml");
+				frame.setVisible(false);
+			};				
+		});
 		
-		
+		/*JButton showStocksCards = new JButton("Show Stocks and Cards");
+		showStocksCards.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Game.getInstance().getCurrentPlayer().get
+
+			};				
+		});*/
+
+
 		endTurn = new JButton("End Turn");
 		endTurn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -241,19 +284,19 @@ public class AppWindow extends JFrame {
 
 					@Override
 					protected Void doInBackground() throws Exception {
-						
+
 						handler.userEndTurn();
-						
+
 						return null;
 					}
 				};
-			
-					sw.execute();
-				
-				
+
+				sw.execute();
+
+
 			}
 		});
-		
+
 		// *** End Buttons ***
 
 		JPanel bottomPanel = new JPanel();
@@ -266,16 +309,18 @@ public class AppWindow extends JFrame {
 		bottomPanel.add(mortgage);
 		bottomPanel.add(debug);
 		bottomPanel.add(triggerCard);
+		bottomPanel.add(save);
+		bottomPanel.add(load);
 		bottomPanel.add(endTurn);
 
 		gamePanel.initBoard(squares);
 		frame.pack();
 	}
-	
+
 	public GamePanel getGamePanel(){
 		return gamePanel;
 	}
-	
+
 	public JFrame getFrame(){
 		return frame;
 	}

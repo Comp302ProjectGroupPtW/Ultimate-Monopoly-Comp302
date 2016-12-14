@@ -10,7 +10,9 @@ import java.util.LinkedHashMap;
 import java.util.function.Consumer;
 
 import javax.swing.JOptionPane;
+import javax.xml.bind.annotation.XmlTransient;
 
+@XmlTransient
 public class GuiHandler {
 
 	private static GuiHandler instance;
@@ -50,6 +52,7 @@ public class GuiHandler {
 		window.init();
 		initPlayers();
 		updateBalances();
+		//updateOwners();
 
 	}
 
@@ -113,7 +116,7 @@ public class GuiHandler {
 		return (T) JOptionPane.showInputDialog(frame, message, title, JOptionPane.QUESTION_MESSAGE, null,
 				selectionValues, selectionValues[0]);
 	}
-	
+
 	public void askYesNo(String message, String title, Consumer<Boolean> callback){
 		if(window == null)
 			return;
@@ -175,6 +178,26 @@ public class GuiHandler {
 
 	}
 
+	public void updateOwners(){
+		/*Property p;
+		for (Square sq : squareToGuiMap.keySet()) {
+			if(sq instanceof Property && (p = (Property) sq).getOwner() != null)
+			setOwner(p, p.getOwner());
+		}*/
+		for(Player currentPlayer : game.getPlayers()){
+			ArrayList<Square> cumulation = new ArrayList<Square>();
+			cumulation.addAll(currentPlayer.getEstates());
+			cumulation.addAll(currentPlayer.getTransitStations());
+			cumulation.addAll(currentPlayer.getCabCompanies());
+			cumulation.addAll(currentPlayer.getUtilities());
+			for (Square square : cumulation) {
+				if(square instanceof Property){
+					((Property) square).setOwner(currentPlayer);
+				}
+			}
+		}
+	}
+
 	public void finish(Player player){
 		if(window == null)
 			return;
@@ -204,14 +227,17 @@ public class GuiHandler {
 		game.userToggledMortgage();
 	}
 
+	public void userTriggerCard() {
+		game.triggerCard();	
+	}
+
 	public void userEndTurn() {
 		game.userEndTurn();
 
 	}
-
 	public void setOwner(Property property, Player player){
-		 if(window == null)
-			   return;
+		if(window == null)
+			return;
 		((GuiProperty) getGui(property)).setOwner(player.getName());
 	}
 
@@ -233,6 +259,8 @@ public class GuiHandler {
 
 	public void enableEndTurn(boolean b) {
 		window.getEndTurn().setEnabled(b);
+		if(!b && !window.getRollDice().isEnabled() && !window.getMrM().isEnabled())
+			window.getEndTurn().setEnabled(true);
 	}
 
 	private GuiPlayer[] getGuiPlayersOrdered(){
@@ -254,6 +282,7 @@ public class GuiHandler {
 	}
 
 	private void initPlayers(){
+		System.out.println(Board.getInstance().getSquareAt(1, 0));
 		for (Player player : playerToGuiMap.keySet()) {
 			getGui(player.getLocation()).addPlayer(getGui(player));
 		}

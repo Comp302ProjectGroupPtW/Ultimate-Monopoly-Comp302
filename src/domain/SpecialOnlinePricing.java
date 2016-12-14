@@ -23,10 +23,11 @@ public class SpecialOnlinePricing extends CommunityCard implements Keepable, Pla
 	
 	@Override
 	public void cardAction() {
+		GuiHandler.getInstance().showMessage(getDescription(), "Card");
 		Player currentPlayer = Game.getInstance().getCurrentPlayer();
 		currentPlayer.attach(this);
 		currentPlayer.detach(this);
-		GuiHandler.getInstance().showMessage(getDescription(), "Card");
+		
 	}
 
 	@Override

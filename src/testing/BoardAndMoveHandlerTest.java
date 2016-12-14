@@ -235,7 +235,7 @@ public class BoardAndMoveHandlerTest {
 
 	@Test
 	public void testGetLayerLength(){
-		
+
 		assertEquals("Returned an unexpected length.", 24, b.getLayerLength(0));
 
 		assertEquals("Returned an unexpected length.", 40, b.getLayerLength(1));
@@ -253,7 +253,7 @@ public class BoardAndMoveHandlerTest {
 
 	@Test
 	public void testGetSquareAt(){
-		
+
 		// b.getSquares() is assumed to be working correctly for this test.
 		Square[][] squares = b.getSquares();
 
@@ -386,7 +386,7 @@ public class BoardAndMoveHandlerTest {
 		poolAfter = b.getPool();
 		assertEquals("Total amount in pool is calculated incorrectly.",
 				0, poolAfter);
-		
+
 		amount = Integer.MIN_VALUE;
 		poolBefore = b.getPool();  // Pool should not change
 
@@ -466,13 +466,13 @@ public class BoardAndMoveHandlerTest {
 		assertEquals("Player is not at expected position.", expectedPosition, p.getPosition());
 		assertEquals("Player is not at expected square.",
 				b.getSquareAt(expectedLayer, expectedPosition), p.getLocation());
-		
+
 		/* The test in comments worked when I ran it.
 		 * I put it as a comment because it takes about 30 seconds.
 		 * You can uncomment the lines below to test it.
 		 */
 		/*
-		
+
 		b.move(p, Integer.MAX_VALUE);
 
 		expectedLayer = 2;
@@ -482,37 +482,37 @@ public class BoardAndMoveHandlerTest {
 		assertEquals("Player is not at expected position.", expectedPosition, p.getPosition());
 		assertEquals("Player is not at expected square.",
 				b.getSquareAt(expectedLayer, expectedPosition), p.getLocation());
-		
-		*/
+
+		 */
 	}
-	
+
 	@Test(expected = IllegalArgumentException.class)
 	public void testMoveWithNullPlayer(){
 
 		Player p = null;
 
 		b.move(p, 1);
-		
+
 		fail("Did not throw IllegalArgumentException.");
 	}
-	
+
 	@Test(expected = IllegalArgumentException.class)
 	public void testMoveWithNegativeDiceValue(){
 
 		Player p = new Player(0, "Tester", 0);
 
 		b.move(p, -1);
-		
+
 		fail("Did not throw IllegalArgumentException.");
 	}
-	
+
 	@Test(expected = IllegalArgumentException.class)
 	public void testMoveWithZeroDiceValue(){
 
 		Player p = new Player(0, "Tester", 0);
 
 		b.move(p, 0);
-		
+
 		fail("Did not throw IllegalArgumentException.");
 	}
 
@@ -529,7 +529,7 @@ public class BoardAndMoveHandlerTest {
 		assertEquals("Player is not at expected square.",
 				b.getSquareAt(expectedLayer, expectedPosition), p.getLocation());
 	}
-	
+
 	@Test(expected = IllegalArgumentException.class)
 	public void testMoveDirectWithoutSquareActionWithNullPlayer(){
 
@@ -538,7 +538,7 @@ public class BoardAndMoveHandlerTest {
 		fail("Did not throw IllegalArgumentException.");
 
 	}
-	
+
 	@Test(expected = IllegalArgumentException.class)
 	public void testMoveDirectWithoutSquareActionWithNullSquare(){
 
@@ -585,7 +585,7 @@ public class BoardAndMoveHandlerTest {
 		fail("Did not throw IllegalArgumentException.");
 
 	}
-	
+
 	@Test(expected = IllegalArgumentException.class)
 	public void testMoveDirectWithNullSquare(){
 
@@ -609,7 +609,7 @@ public class BoardAndMoveHandlerTest {
 		fail("Did not throw IllegalArgumentException.");
 	}
 
-	
+
 	@Test
 	public void testSwitchLayerByTransitStation(){
 
@@ -710,7 +710,7 @@ public class BoardAndMoveHandlerTest {
 		assertEquals("Player is not at expected position.", expectedPosition, p.getPosition());
 		assertEquals("Player is not at expected square.",
 				b.getSquareAt(expectedLayer, expectedPosition), p.getLocation());
-		
+
 		b.moveMrm(p);
 
 		expectedLayer = 1;

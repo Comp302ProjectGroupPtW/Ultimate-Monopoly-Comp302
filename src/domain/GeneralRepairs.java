@@ -14,7 +14,7 @@ public class GeneralRepairs extends CommunityCard {
 
 	@Override
 	public void cardAction() {
-		// TODO Auto-generated method stub
+		GuiHandler.getInstance().showMessage(getDescription(), "Card");
 		Player currentPl = Game.getInstance().getCurrentPlayer();
 		int house = 0;
 		int hotel = 0;
@@ -41,7 +41,7 @@ public class GeneralRepairs extends CommunityCard {
 		int withdrawAmount = 25*(others + house) + 100*(hotel + skyscraper);
 		currentPl.withdraw(withdrawAmount);
 		
-		GuiHandler.getInstance().showMessage(getDescription(), "Card");
+		
 	}
 
 }

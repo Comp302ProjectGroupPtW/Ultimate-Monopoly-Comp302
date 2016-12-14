@@ -18,5 +18,10 @@ public class Pair {
 	public boolean isEven(){
 		return isEven;
 	}
+
+	public Pair() {
+		super();
+
+	}
 	
 }

@@ -13,6 +13,7 @@ public class StreetRepairs extends CommunityCard {
 
 	@Override
 	public void cardAction() {
+		GuiHandler.getInstance().showMessage(getDescription(), "Card");
 		Player currentPl = Game.getInstance().getCurrentPlayer();
 		int house = 0;
 		int hotel = 0;
@@ -39,7 +40,7 @@ public class StreetRepairs extends CommunityCard {
 		int withdrawAmount = 25*others + 40*house + 115*hotel + 100*skyscraper;
 		currentPl.withdraw(withdrawAmount);
 		
-		GuiHandler.getInstance().showMessage(getDescription(), "Card");
+		
 	}
 
 }

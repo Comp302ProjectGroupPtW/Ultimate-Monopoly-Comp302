@@ -3,10 +3,6 @@ package domain;
 
 public class Chance extends Square {
 
-	public Chance(){
-		
-	}
-	
 	public Chance(int id){
 		this.setId(id);
 		this.pb= new DoNothingPassBehavior();
@@ -17,6 +13,11 @@ public class Chance extends Square {
 	public void squareAction(Player currentPlayer, Board board) {
 		Card c = board.pickAChanceCard();    
 		c.cardAction();
+	}
+
+	public Chance() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 }

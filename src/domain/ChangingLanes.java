@@ -11,7 +11,7 @@ public class ChangingLanes extends ChanceCard {
 
 	@Override
 	public void cardAction() {
-		// TODO Auto-generated method stub
+		GuiHandler.getInstance().showMessage(getDescription(), "Card");
 		
 		Player currentPlayer = Game.getInstance().getCurrentPlayer();
 		Square playerLocation = currentPlayer.getLocation();
@@ -48,7 +48,7 @@ public class ChangingLanes extends ChanceCard {
 			Square destination = Board.getInstance().getSquareAt(1, 0);
 			Board.getInstance().moveDirect(currentPlayer, destination);
 		}
-		GuiHandler.getInstance().showMessage(getDescription(), "Card");
+		
 	}
 
 }

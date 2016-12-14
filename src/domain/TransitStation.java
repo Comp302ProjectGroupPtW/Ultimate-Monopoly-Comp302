@@ -1,8 +1,11 @@
 package domain;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
 public class TransitStation extends Property implements Buildable {
-
+	@XmlElement
 	private int trainDepot;
 	public TransitStation(String name, int id){
 		this.setName(name);
@@ -14,6 +17,7 @@ public class TransitStation extends Property implements Buildable {
 		this.pb= new TransitStationPassBehavior();
 	}
 	public TransitStation(){
+		this.pb= new TransitStationPassBehavior();
 	}
 
 	@Override
@@ -88,7 +92,7 @@ public class TransitStation extends Property implements Buildable {
 		GuiHandler.getInstance().updateBuilding(this);
 	}
 
-	@Override
+
 	public void setBuildings(int buildings) {
 		this.trainDepot=buildings;
 		this.updateRent();	

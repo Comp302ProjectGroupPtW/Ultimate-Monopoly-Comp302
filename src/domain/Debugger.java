@@ -7,13 +7,16 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.function.Predicate;
 
 import javax.swing.JList;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.JLabel;
@@ -21,7 +24,9 @@ import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JCheckBox;
+
 import java.awt.Component;
+
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
 
@@ -44,7 +49,7 @@ public class Debugger extends JDialog {
 	private JCheckBox chckbxAddCard;
 	private JCheckBox chckbxAddShare;
 	private JTextArea textArea;
-	
+
 	/**
 	 * Launch the application.
 	 */
@@ -69,7 +74,7 @@ public class Debugger extends JDialog {
 		contentPanel.setLayout(new GridLayout(0, 8, 0, 0));
 		{
 			list = new JList<Player>(Game.getInstance().getPlayers());
-			
+
 			contentPanel.add(list);
 		}
 		{
@@ -78,8 +83,8 @@ public class Debugger extends JDialog {
 			sqs.addAll(Arrays.asList(Board.getInstance().getSquares()[1]));
 			sqs.addAll(Arrays.asList(Board.getInstance().getSquares()[2]));
 			list1 = new JList<Square>(sqs.toArray(new Square[1]));
-			
-			contentPanel.add(list1);
+
+			contentPanel.add(new JScrollPane(list1));
 		}
 		{
 			textField = new JTextField();
@@ -91,8 +96,15 @@ public class Debugger extends JDialog {
 			sqs.addAll(Arrays.asList(Board.getInstance().getSquares()[0]));
 			sqs.addAll(Arrays.asList(Board.getInstance().getSquares()[1]));
 			sqs.addAll(Arrays.asList(Board.getInstance().getSquares()[2]));
+			sqs.removeIf(new Predicate<Square>() {
+
+				@Override
+				public boolean test(Square t) {
+					return !(t instanceof Property);
+				}
+			});
 			list2 = new JList<Square>(sqs.toArray(new Square[1]));
-			contentPanel.add(list2);
+			contentPanel.add(new JScrollPane(list2));
 		}
 		{
 			textField_1 = new JTextField();
@@ -105,8 +117,8 @@ public class Debugger extends JDialog {
 			sqs.addAll(Board.getInstance().getCommunityCards());
 			list3 = new JList<Card>(sqs.toArray(new Card[1]));
 			contentPanel.add(list3);
-			
-			
+
+
 		}
 		{
 			list4 = new JList<Company>(Board.getInstance().getCompanyArray());
@@ -118,7 +130,7 @@ public class Debugger extends JDialog {
 		}
 		{
 			JPanel buttonPane = new JPanel();
-			
+
 			buttonPane.setAlignmentX(Component.LEFT_ALIGNMENT);
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
@@ -164,44 +176,45 @@ public class Debugger extends JDialog {
 				okButton.setActionCommand("OK");
 				getRootPane().setDefaultButton(okButton);
 				okButton.addActionListener(new ActionListener() {
-					 
-		            public void actionPerformed(ActionEvent e)
-		            {
-		            	Player pl = list.getSelectedValue();
-		            	if(chckbxSetAStart.isSelected()){
-		            		Board.getInstance().moveDirectWithoutSquareAction(pl, list1.getSelectedValue());
-		            		  
-		            	}
-		            	if(chckbxAddProperty.isSelected()){
-		            		 Property pr = (Property) list2.getSelectedValue();
-		            		pl.deposit(pr.getPrice());
-		            		pl.buyProperty(pr);
-		            		int num =Integer.parseInt(textField_1.getText());
-		            		((Buildable) pr).setHouses(num);
-		            		GuiHandler.getInstance().updateBuilding(pr);
-		            	}
-		            	if(chckbxSetBalance.isSelected()){
-		            		int money=Integer.parseInt(textField.getText());
-		            		pl.setBalance(money);
-		            		GuiHandler.getInstance().updateBalances();
-		            	}
-		            	if(chckbxAddCard.isSelected()){
-		            		pl.addCard(list3.getSelectedValue());
-		            	}
-		            	if(chckbxAddShare.isSelected()){
-		            		Company co = list4.getSelectedValue();
-		            		for (int i = 0; i < Integer.parseInt(textArea.getText()); i++) {
-		            			pl.deposit(co.getPriceOfShare());
-			            		pl.buyShare(co);
+
+					public void actionPerformed(ActionEvent e)
+					{
+						Player pl = list.getSelectedValue();
+						if(chckbxSetAStart.isSelected()){
+							Board.getInstance().moveDirectWithoutSquareAction(pl, list1.getSelectedValue());
+
+						}
+						if(chckbxAddProperty.isSelected()){
+							Property pr = (Property) list2.getSelectedValue();
+							pl.deposit(pr.getPrice());
+							pl.buyProperty(pr);
+							int num =Integer.parseInt(textField_1.getText());
+							((Buildable) pr).setBuildings(num);
+							GuiHandler.getInstance().updateBuilding(pr);
+						}
+						if(chckbxSetBalance.isSelected()){
+							int money=Integer.parseInt(textField.getText());
+							pl.setBalance(money);
+							GuiHandler.getInstance().updateBalances();
+						}
+						if(chckbxAddCard.isSelected()){
+							pl.addCard(list3.getSelectedValue());
+						}
+						if(chckbxAddShare.isSelected()){
+							Company co = list4.getSelectedValue();
+							for (int i = 0; i < Integer.parseInt(textArea.getText()); i++) {
+								if(co.hasBuyableShare())
+									pl.deposit(co.getPriceOfShare());
+								pl.buyShare(co);
 							}
-		            		
-		            		
-		            	}
-		            	
-		              
-		            	
-		            }
-		        });  
+
+
+						}
+
+
+
+					}
+				});  
 			}
 			buttonPane.add(okButton);
 			{

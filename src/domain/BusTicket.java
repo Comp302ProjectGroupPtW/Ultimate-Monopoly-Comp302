@@ -27,7 +27,7 @@ public class BusTicket extends ChanceCard implements Keepable{
 	
 	@Override
 	public void cardAction() {
-		// TODO Auto-generated method stub
+		GuiHandler.getInstance().showMessage(getDescription(), "Card");
 		Player currentPlayer = Game.getInstance().getCurrentPlayer();
 	
 		ArrayList<Square> side = Board.getInstance().getSideOfSquare(currentPlayer.getLayer(), currentPlayer.getPosition());
@@ -37,8 +37,6 @@ public class BusTicket extends ChanceCard implements Keepable{
 		Square destination = GuiHandler.getInstance().askSelection("Choose your destination.", "Card Action", sideArray);
 		Board.getInstance().moveDirect(currentPlayer, destination);
 		currentPlayer.releaseAllCards();
-		
-		GuiHandler.getInstance().showMessage(getDescription(), "Card");
 	}
 
 

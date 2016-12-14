@@ -1,6 +1,16 @@
 package domain;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlIDREF;
+import javax.xml.bind.annotation.XmlTransient;
+
+@XmlAccessorType(XmlAccessType.FIELD)
 public abstract class Property extends Square {
+	
+	//@XmlTransient
+	@XmlIDREF
 	private Player owner;
 	private int rent;
 	private int price;
@@ -42,6 +52,7 @@ public abstract class Property extends Square {
 		return isMortgaged;
 	}
 
+	//@XmlIDREF
 	public void setOwner(Player owner) {
 		this.owner = owner;
 		GuiHandler.getInstance().setOwner(this, owner);

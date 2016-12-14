@@ -6,6 +6,19 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.XmlIDREF;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+
+
 /**
  * Board class holds {@link Square} objects, pool, {@link ChanceCard} and {@link CommunityCard} objects in the game.
  * This class is responsible from the movement of the {@link Player} objects on the Board.
@@ -18,6 +31,9 @@ public class Board {
 	private static Board instance = new Board();
 	@XmlElement
 	private int pool;
+	//@XmlElementWrapper(name = "layers")
+	//@XmlJavaTypeAdapter(SaveLoadHandler.Square2DArrayAdapter2.class)
+	@XmlElement
 	private Square[][] squares;
 	@XmlElementWrapper(name = "communityCards")
 	@XmlElement(name = "communityCard", type = CommunityCard.class)
@@ -80,7 +96,7 @@ public class Board {
 		return companyArray;
 	}
 
-	public Square getHighestRentInLayer(int layer){ //0,1 or 2, içten dışa respectively.
+	public Square getHighestRentInLayer(int layer){ //0,1 or 2, i�ten d��a respectively.
 		Square sq = squares[0][0]; //if "go" square returns,there is no owned square with rent.
 		int rent = 1;
 		for (int j = 0; j < squares[layer].length; j++) {
@@ -475,10 +491,10 @@ public class Board {
 		squares[1][9]  = new Estate("Connecticut Avenue", 9, 8, 120, 50, "light blue"); 
 		squares[1][10] = new Misc("Jail(Just Visiting)", 10);
 		squares[1][11] = new Estate("St. Charles Place", 11, 10, 140, 100, "pink");
-		squares[1][12] = new Utility("Electric Company", 12); //(fiyatlarï¿½ classï¿½n iï¿½inde)
+		squares[1][12] = new Utility("Electric Company", 12); //(fiyatlar� class�n i�inde)
 		squares[1][13] = new Estate("States Avenue", 13, 10, 140, 100, "pink");
 		squares[1][14] = new Estate("Virginia Avenue", 14, 12, 160, 100, "pink");
-		TransitStation pennsyl = new TransitStation("Pennsylvania Railroad", 15); //(fiyatlarï¿½ classï¿½n iï¿½inde)
+		TransitStation pennsyl = new TransitStation("Pennsylvania Railroad", 15); //(fiyatlar� class�n i�inde)
 		squares[1][15] = pennsyl;
 		squares[1][16] = new Estate("St. James Place", 16, 14, 180, 100, "orange");
 		squares[1][17] = new CommunityChest(17);
@@ -544,7 +560,7 @@ public class Board {
 		squares[2][3]  = new Estate("Nicollet Avenue", 65, 1, 30, 50, "light pink");
 		squares[2][4]  = new Estate("Hennepin Avenue", 66, 3, 60, 50, "light pink");
 		squares[2][5]  = new Misc("Bus Ticket", 67);
-		squares[2][6]  = new CabCompany("Checker Cab Co.", 68); //name, id (fiyatlarï¿½ classï¿½n iï¿½inde)
+		squares[2][6]  = new CabCompany("Checker Cab Co.", 68); //name, id (fiyatlar� class�n i�inde)
 		squares[2][7]  = reading;
 		squares[2][8]  = new Estate("Esplanade Avenue", 69, 5, 90, 50, "light green");
 		squares[2][9]  = new Estate("Canal Street", 70, 5, 90, 50, "light green");
@@ -553,7 +569,7 @@ public class Board {
 		squares[2][12] = new Estate("Magazine Street", 73, 8, 120, 50, "light green");
 		squares[2][13] = new Estate("Bourbon Street", 74, 8, 120, 50, "light green");
 		squares[2][14] = h2;
-		squares[2][15] = new Misc("Auction House", 76);
+		squares[2][15] = new Auction(76);
 		squares[2][16] = new Estate("Katy Freeway", 77, 11, 150, 100, "cream");
 		squares[2][17] = new Estate("Westheimer Road", 78, 11, 150, 100, "cream");
 		squares[2][18] = new Utility("Internet Service Provider", 79);
@@ -657,6 +673,33 @@ public class Board {
 	public int getPool(){
 		return pool;
 	}
+	
+	/*@XmlElement
+	private void setLayer0(Square[] squares){
+		this.squares[0] = squares;
+	}
+	
+	private Square[] getLayer0(){
+		return this.squares[0];
+	}
+	
+	@XmlElement
+	private void setLayer1(Square[] squares){
+		this.squares[1] = squares;
+	}
+	
+	private Square[] getLayer1(){
+		return this.squares[1];
+	}
+	
+	@XmlElement
+	private void setLayer2(Square[] squares){
+		this.squares[2] = squares;
+	}
+	
+	private Square[] getLayer2(){
+		return this.squares[2];
+	}*/
 
 	//move related things
 	private MoveHandler mh = new MoveHandler(this);

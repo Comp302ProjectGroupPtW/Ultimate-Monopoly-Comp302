@@ -2,10 +2,6 @@ package domain;
 
 
 public class LuxuryTax extends Square {
-	
-	public LuxuryTax(){
-		
-	}
 
 	public LuxuryTax(String name, int id){
 	this.setName(name);
@@ -18,6 +14,11 @@ public class LuxuryTax extends Square {
 		// TODO Auto-generated method stub
 		currentPlayer.withdraw(75);
 		board.addToPool(75);
+	}
+
+	public LuxuryTax() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 }

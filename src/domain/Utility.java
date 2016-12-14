@@ -9,7 +9,9 @@ public class Utility extends Property {
 		this.setPrice(150);
 		this.pb= new DoNothingPassBehavior();
 	}
-	public Utility() {		
+
+	public Utility() {
+		super();
 	}
 
 	@Override
